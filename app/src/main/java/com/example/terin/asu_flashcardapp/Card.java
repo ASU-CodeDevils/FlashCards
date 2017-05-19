@@ -60,11 +60,11 @@ public class Card {
     }
 
     //TODO: generate user card stats
-    public UserStats viewDetail (){
+    //public UserStats viewDetail (){
 
-        return UserStats;
+        //return UserStats;
 
-    }
+    //}
 
     public String getCardQuestion() {
         return cardQuestion;

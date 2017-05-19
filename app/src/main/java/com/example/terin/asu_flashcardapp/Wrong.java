@@ -1,7 +1,6 @@
 package com.example.terin.asu_flashcardapp;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * Class that represents wrong choice answers.

@@ -55,11 +55,11 @@ public class Deck {
     }
 
     //TODO: generate user deck stats
-    public UserStats viewDetail (){
+    //public UserStats viewDetail (){
 
-        return UserStats;
+        //return UserStats;
 
-    }
+    //}
 
     public int getDeckId() {
         return deckId;

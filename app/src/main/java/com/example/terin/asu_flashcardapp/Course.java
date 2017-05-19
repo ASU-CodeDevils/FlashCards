@@ -42,11 +42,11 @@ public class Course {
     }
 
     //TODO: generate user course stats
-    public UserStats viewDetail (){
+    //public UserStats viewDetail (){
 
-        return UserStats;
+        //return UserStats;
 
-    }
+    //}
 
     public int getCourseId() {
         return courseId;
