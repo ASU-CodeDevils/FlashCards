@@ -1,7 +1,20 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--
+        This section is the child of the SuperMaterialTheme.
+        Customizations happen for Lollipop and greater.
+        i.e. design for devices SDK's < v21
+    -->
+    <style name="AppMaterialTheme" parent = "SuperMaterialTheme">
+
+    </style>
+
+
+    <!--
+        This is essentially the parent, for pre-Lollipop and Lolipop versions.
+        i.e. this is where the backwards compatibility happens for Material.
+    -->
+    <style name="SuperMaterialTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
