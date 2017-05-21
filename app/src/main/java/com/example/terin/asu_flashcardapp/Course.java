@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Course {
 
-    private int courseId;
+    private int _courseId;
     private String courseName;
     private int authorId;
     private Date createDate;
@@ -48,12 +48,17 @@ public class Course {
 
     //}
 
-    public int getCourseId() {
-        return courseId;
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public int get_courseId() {
+        return _courseId;
+    }
+
+    public void set_courseId(int _courseId) {
+        this._courseId = _courseId;
     }
 
     public String getCourseName() {
@@ -72,7 +77,6 @@ public class Course {
         return createDate;
     }
 
-    //TODO: create date is set from info passed from DB entry
     private void setCreateDate(Date createDate) {
 
     }

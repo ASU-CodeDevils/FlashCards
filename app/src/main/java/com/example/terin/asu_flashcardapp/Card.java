@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Card {
 
-    private int cardId;
+    private int _cardId;
     private String cardQuestion;
     private String correct;
     private int correctCount, totalCount, deckId;
@@ -31,6 +31,8 @@ public class Card {
         }
 
     }
+
+
 
     //TODO: generates a random set of wrong answers
     public ArrayList<Wrong> generateWrongAnswers() {
@@ -98,12 +100,12 @@ public class Card {
         this.totalCount = totalCount;
     }
 
-    public int getCardId() {
-        return cardId;
+    public int get_cardId() {
+        return _cardId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void set_cardId(int _cardId) {
+        this._cardId = _cardId;
     }
 
     public int getAuthorId() {
@@ -122,7 +124,10 @@ public class Card {
         this.deckId = deckId;
     }
 
-    //TODO: create date is set from info passed from DB entry
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
     private void setCreateDate(Date createDate) {
 
     }

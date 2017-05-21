@@ -11,7 +11,7 @@ import java.util.ArrayDeque;
 
 public class Deck {
 
-    private int deckId;
+    private int _deckId;
     private int courseId;
     private String deckName;
     private int authorId;
@@ -61,12 +61,12 @@ public class Deck {
 
     //}
 
-    public int getDeckId() {
-        return deckId;
+    public int get_deckId() {
+        return _deckId;
     }
 
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
+    public void set_deckId(int _deckId) {
+        this._deckId = _deckId;
     }
 
     public String getDeckName() {

@@ -10,7 +10,7 @@ import java.sql.Date;
 
 public class Wrong {
 
-    private int wrongId;
+    private int _wrongId;
     private String answer;
     private int usedCount, selectedCount;
     private int authorId;
@@ -39,12 +39,12 @@ public class Wrong {
 
     }
 
-    public int getWrongId() {
-        return wrongId;
+    public int get_wrongId() {
+        return _wrongId;
     }
 
-    public void setWrongId(int wrongId) {
-        this.wrongId = wrongId;
+    public void set_wrongId(int _wrongId) {
+        this._wrongId = _wrongId;
     }
 
     public String getAnswer() {
