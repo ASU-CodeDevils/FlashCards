@@ -36,6 +36,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
+                    style="@android:style/Widget.Material.AutoCompleteTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
@@ -51,6 +52,7 @@
 
                 <EditText
                     android:id="@+id/password"
+                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
@@ -65,11 +67,11 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
+                android:text="@string/prompt_email"
                 android:textStyle="bold" />
 
         </LinearLayout>

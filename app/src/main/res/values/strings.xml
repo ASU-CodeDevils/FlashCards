@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ASU_FlashCardApp</string>
 
-    <!-- Strings related to login -->
+    <!-- Login Activity string -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -13,4 +13,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!--Options Activity strings -->
+    <string name="create_new_course">Create New Course</string>
+    <string name="goto_study">Go Study</string>
+    <string name="goto_stats">View Stats</string>
+
+    <!-- Create Course Activity strings -->
+    <string name="acceptCourseButton">Create Course</string>
+    <string name="prevCourseName">Temp Course Name</string>
+    <string name="createCourseName">Enter course Name</string>
 </resources>

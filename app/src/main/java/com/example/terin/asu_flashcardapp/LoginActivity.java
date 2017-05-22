@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Check the if runniing Android 5.0 or higher i.e Lollipop or other, used for Materials design.
+        //Check the if running Android 5.0 or higher i.e Lollipop or other, used for Materials design.
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             //Material API's called.
 
@@ -94,8 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-
-        intent = new Intent(this,AddCourse.class);
+        intent = new Intent(this, Options.class);
 
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);

@@ -1,0 +1,11 @@
+<!--
+    Custimizations for Lollipop SDK versions >= v21
+-->
+<resources>
+    <style name="AppMaterialTheme" parent="SuperMaterialTheme">
+        <!--
+            There actually will not be any code placed here, it's all
+            taken care of in the v21/styles.xml file
+        -->
+    </style>
+</resources>
