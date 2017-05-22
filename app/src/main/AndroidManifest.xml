@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddCourse"></activity>
+        <activity android:name=".Options"></activity>
+        <activity android:name=".StudyWindow"></activity>
     </application>
 
 </manifest>

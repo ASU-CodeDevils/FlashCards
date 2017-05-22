@@ -1,4 +1,17 @@
 <resources>
+    <!--
+        This is essentially the parent, for pre-Lollipop and Lolipop versions.
+        i.e. this is where the backwards compatibility happens for Material.
+    -->
+    <style name="SuperMaterialTheme" parent="Theme.AppCompat">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+
 
     <!--
         This section is the child of the SuperMaterialTheme.
@@ -6,19 +19,11 @@
         i.e. design for devices SDK's < v21
     -->
     <style name="AppMaterialTheme" parent = "SuperMaterialTheme">
-
+        <!--
+            There actually will not be any code placed here, it's all
+            taken care of in the v21/styles.xml file
+        -->
     </style>
 
-
-    <!--
-        This is essentially the parent, for pre-Lollipop and Lolipop versions.
-        i.e. this is where the backwards compatibility happens for Material.
-    -->
-    <style name="SuperMaterialTheme" parent="Theme.AppCompat">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
 </resources>

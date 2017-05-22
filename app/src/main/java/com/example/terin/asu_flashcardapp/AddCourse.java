@@ -1,78 +1,39 @@
 package com.example.terin.asu_flashcardapp;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
 
 import java.util.ArrayList;
 
 public class AddCourse extends AppCompatActivity {
+    final EditText editText = new EditText(this);
+    final TextView textView = new TextView(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_course);
 
-        //Layout
-        RelativeLayout layout = new RelativeLayout(this);
-        layout.setBackgroundColor(Color.rgb(00,66,99));
+        Button courseAcceptButton = (Button)findViewById(R.id.courseAcceptButton);
 
-        //Widget Info
-        Button button = new Button(this);
-        button.setId(1);
-        button.setText("Add Course");
-
-
-        TextView textView = new TextView(this);
-        textView.setId(2);
-        textView.setTextColor(Color.WHITE);
-        textView.setText("Enter Course Name");
-        final EditText editText = new EditText(this);
-        editText.setId(3);
-        button.setOnClickListener(
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
+        courseAcceptButton.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    public void onClick(View view){
                         createCourse(editText.getText().toString());
+                        createCourse(textView.getEditableText().toString());
+                        Intent startOptionsActivity = new Intent(getApplicationContext(), Options.class);
+                        startActivity(startOptionsActivity);
                     }
                 }
         );
-
-        RelativeLayout.LayoutParams buttonDetails = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        RelativeLayout.LayoutParams textViewDetails = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        RelativeLayout.LayoutParams editTextDetails = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        textViewDetails.addRule(RelativeLayout.ABOVE,editText.getId());
-        textViewDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        textViewDetails.setMargins(0,0,0,50);
-        editTextDetails.addRule(RelativeLayout.ABOVE,button.getId());
-        editTextDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        editTextDetails.setMargins(0,0,0,50);
-        buttonDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        buttonDetails.addRule(RelativeLayout.CENTER_VERTICAL);
-
-
-        layout.addView(textView, textViewDetails);
-        layout.addView(editText, editTextDetails);
-        layout.addView(button, buttonDetails);
-
-        setContentView(layout);
-
-
 
     }
 
