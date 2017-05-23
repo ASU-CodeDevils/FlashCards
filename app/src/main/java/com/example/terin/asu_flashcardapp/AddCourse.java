@@ -2,6 +2,7 @@ package com.example.terin.asu_flashcardapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,23 +14,28 @@ import android.content.Intent;
 import java.util.ArrayList;
 
 public class AddCourse extends AppCompatActivity {
-    final EditText editText = new EditText(this);
-    final TextView textView = new TextView(this);
+
+    private static EditText editText;
+    private static TextView textView;
+    private static Intent startOptionsActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
 
-        Button courseAcceptButton = (Button)findViewById(R.id.courseAcceptButton);
+        startOptionsActivity = new Intent(this, Options.class);
+        Button courseAcceptButton = (Button) findViewById(R.id.courseAcceptButton);
+        editText = (EditText) findViewById(R.id.createCourseNameView);
+        textView = (TextView) findViewById(R.id.prevCourseName);
 
         courseAcceptButton.setOnClickListener(
-                new Button.OnClickListener()
+                new View.OnClickListener()
                 {
+                    @Override
                     public void onClick(View view){
                         createCourse(editText.getText().toString());
-                        createCourse(textView.getEditableText().toString());
-                        Intent startOptionsActivity = new Intent(getApplicationContext(), Options.class);
+
                         startActivity(startOptionsActivity);
                     }
                 }
