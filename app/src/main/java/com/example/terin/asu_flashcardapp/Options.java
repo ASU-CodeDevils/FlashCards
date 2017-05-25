@@ -15,6 +15,8 @@ import android.widget.Button;
 
 public class Options extends AppCompatActivity{
 
+    private Intent startCreateActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class Options extends AppCompatActivity{
                     @Override
                     public void onClick(View view){
 
-                        Intent startCreateActivity = new Intent(getApplicationContext(), AddCourse.class);
+                        startCreateActivity = new Intent(getApplicationContext(), AddCourse.class);
                         startActivity(startCreateActivity);
                     }
                 }
