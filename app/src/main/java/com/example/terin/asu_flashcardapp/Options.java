@@ -44,7 +44,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        Intent startCreateActivity = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent startCreateActivity = new Intent(getApplicationContext(), StudyWindow.class);
                         startActivity(startCreateActivity);
 
                     }
