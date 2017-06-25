@@ -23,4 +23,8 @@
     <string name="acceptCourseButton">Create Course</string>
     <string name="prevCourseName">Temp Course Name</string>
     <string name="createCourseName">Enter course Name</string>
+
+    <!-- Create fragment code -->
+    <string name="createButton">Create</string>
+    <string name="tempInputTitle">User Title Goes Here</string>
 </resources>

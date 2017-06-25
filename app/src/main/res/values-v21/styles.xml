@@ -8,4 +8,21 @@
             taken care of in the v21/styles.xml file
         -->
     </style>
+
+    <style name="SuperMaterialTheme" parent="Theme.AppCompat">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Enables window transitions -->
+
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- This will apply for ripple effects
+        <item name="android:colorControlHighlight">@color/colorAccentLight</item>
+        -->
+
+
+    </style>
 </resources>
