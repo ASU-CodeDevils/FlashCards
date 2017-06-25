@@ -27,12 +27,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/linedwhiteflashcard"
-        tools:layout_editor_absoluteX="8dp" />
+        app:srcCompat="@mipmap/linedwhiteflashcard" />
 
     <TextView
         android:id="@+id/tempTitleInput"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
@@ -49,7 +48,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/previewguideline1"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.158"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
