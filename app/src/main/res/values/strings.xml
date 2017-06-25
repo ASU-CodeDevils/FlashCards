@@ -15,7 +15,7 @@
     </string>
 
     <!--Options Activity strings -->
-    <string name="create_new_course">Create New Course</string>
+    <string name="create_new_course">Create New ...</string>
     <string name="goto_study">Go Study</string>
     <string name="goto_stats">View Stats</string>
 
