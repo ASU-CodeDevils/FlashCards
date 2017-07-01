@@ -2,6 +2,7 @@ package com.example.terin.asu_flashcardapp;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import android.content.Intent;
 
 /**
  * Class that represents a Course that can hold Decks of flashcards.
@@ -18,6 +19,7 @@ public class Course {
     private ArrayList <Deck> decks;
 
     public Course(String courseName, int authorId){
+
 
         this.courseName = courseName;
         this.authorId = authorId;

@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.525">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/newCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/createCourseName" />

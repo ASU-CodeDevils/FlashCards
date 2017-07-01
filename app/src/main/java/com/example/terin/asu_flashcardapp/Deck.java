@@ -16,10 +16,22 @@ public class Deck {
     private String deckName;
     private int authorId;
     private Date createDate;
+
+
+
     private ArrayDeque <Card> cards;
 
     public Deck(String deckName, int courseId, int authorId){
 
+        this.deckName = deckName;
+        this.courseId = courseId;
+        this.authorId = authorId;
+
+    }
+
+    public Deck(int deckID, int courseId, String deckName, int authorId){
+
+        this._deckId = deckID;
         this.deckName = deckName;
         this.courseId = courseId;
         this.authorId = authorId;
@@ -86,7 +98,19 @@ public class Deck {
     }
 
     //TODO: create date is set from info passed from DB entry
-    private void setCreateDate(Date createDate) {
+    public void setCreateDate(Date createDate) {
 
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 }
