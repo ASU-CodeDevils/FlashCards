@@ -21,14 +21,6 @@ public class Deck {
 
     private ArrayDeque <Card> cards;
 
-    public Deck(String deckName, int courseId, int authorId){
-
-        this.deckName = deckName;
-        this.courseId = courseId;
-        this.authorId = authorId;
-
-    }
-
     public Deck(int deckID, int courseId, String deckName, int authorId){
 
         this._deckId = deckID;
