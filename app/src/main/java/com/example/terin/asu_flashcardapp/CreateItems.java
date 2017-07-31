@@ -3,7 +3,8 @@ package com.example.terin.asu_flashcardapp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.*;
+
+import java.util.ArrayList;
 
 /**
  * The "main" activity of all the create options. Because
@@ -25,19 +28,6 @@ import android.widget.*;
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
     /**
-     * This is executed when the user clicks the button on the create
-     * screen.
-     * @param titleString The name of the card, course, or deck being created.
-     */
-    @Override
-    public void createPreview(String titleString) {
-        PreviewFragment previewFragment = (PreviewFragment) getSupportFragmentManager().
-                findFragmentById(R.id.fragment1);
-        previewFragment.setPreviewText(titleString);
-    }
-
-
-    /**
      * The activity that is set when this file is executed.
      * @param savedInstanceState The activity to be set.
      */
@@ -45,6 +35,31 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+
+    }
+
+    /**
+     * This is called by the bottom fragment, TitleCreateFragment,
+     * when the create button is clicked.
+     * @param titleString The title created.
+     */
+    @Override
+    public void createPreview(String titleString){
+        //Adding code to control the fragment(s)
+        FragmentManager fragManage = getSupportFragmentManager();
+        FragmentTransaction fragTrans = fragManage.beginTransaction();
+        PreviewFragment previewFrag = new PreviewFragment();
+
+        //Bundle bundle = new Bundle();
+        //bundle.putString("Old Text", "New Text");
+        //previewFrag.setArguments(bundle);
+
+
+        previewFrag.setPreviewText(titleString);
+        fragTrans.add(R.id.fragment1, previewFrag);
+        fragTrans.commit();
+
+
     }
 
     /**
@@ -68,5 +83,25 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
 
         return true;
+    }
+
+    /**
+     * Copy and pasted from AddCourse.java, as this class will replace
+     * that one for creation of courses, etc.
+     * @param courseName the title of the course the user created.
+     */
+    private void createCourse(String courseName){
+
+        DBHandler db = new DBHandler(this);
+        db.addCourse(courseName);
+
+        //This will probably close back to the Course List Screen.
+
+        ArrayList<Course> courses = db.getCourses();
+
+        for(int i = 0 ; i < courses.size() ; i++){
+            System.out.println("Course Name: " + courses.get(i).getCourseName());
+        }
+
     }
 }

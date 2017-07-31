@@ -1,6 +1,7 @@
 package com.example.terin.asu_flashcardapp;
 
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,12 +13,12 @@ import android.widget.*;
  * Java file that controls the fragment_create_preview.xml file.
  */
 
-public class PreviewFragment extends Fragment{
+public class PreviewFragment extends Fragment {
 
-    private static TextView userTitle;
+    private static TextView tempTitleInput;
 
     /**
-     * The overriden method of onCreateView that works with fragments.
+     * The overridden method of onCreateView that works with fragments.
      * @param inflater A tool that helps build the activity view on screen.
      * @param container A holder of widgets.
      * @param savedInstanceState This instance.
@@ -28,16 +29,21 @@ public class PreviewFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_preview, container, false);
-
+        tempTitleInput = (TextView) view.findViewById(R.id.tempTitleInput);
         return view;
     }
 
     /**
-     *The methos that sets the text on the preview image.
-     * @param previewText the text entered by the user.
+     *The method that sets the text on the preview image.
+     * @param previewText The text entered by the user.
      */
     public void setPreviewText(String previewText){
-        userTitle.setText(previewText);
+        tempTitleInput.setText(previewText);
+        /**
+         * Find how to update the string resource, or just leave the
+         * temptTitle as a hardcoded item, until this is executed?
+         */
+
 
     }
 }

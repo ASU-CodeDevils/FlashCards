@@ -22,16 +22,17 @@ public class Options extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
-        Button create_new_course = (Button)findViewById(R.id.create_new_course);
+        Button create_new = (Button)findViewById(R.id.create_new_course);
         Button goto_study = (Button)findViewById(R.id.goto_study);
         Button goto_stats = (Button)findViewById(R.id.goto_stats);
 
         //The action listener for create_new_course button.
-        create_new_course.setOnClickListener(
+        create_new.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                AddCourse.class);
+                                CreateItems.class);
+                                //AddCourse.class);
                         startActivity(startCreateActivity);
 
                     }

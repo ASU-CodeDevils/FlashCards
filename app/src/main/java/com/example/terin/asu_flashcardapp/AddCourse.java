@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class AddCourse extends AppCompatActivity {
 
-    //private static EditText editText;
     private static TextView textView;
     private static EditText editText;
     private static Intent startOptionsActivity;
