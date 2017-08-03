@@ -1,23 +1,18 @@
 package com.example.terin.asu_flashcardapp;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.*;
 
-import java.util.ArrayList;
 
 /**
  * Created by Stephanie on 5/31/17.
@@ -46,7 +41,6 @@ public class TitleCreateFragment extends Fragment{
         if(context instanceof Activity) {
             activity = (Activity) context;
             try {
-
                 activityCommander = (TitleCreateListener) activity;
             } catch (ClassCastException e) {
                 throw new ClassCastException("\nTHERE'S AN ISSUE WITH ACTIVITY IN TITLECREATE.java.");
@@ -97,7 +91,10 @@ public class TitleCreateFragment extends Fragment{
      */
     public void buttonClicked(View view){
         activityCommander.createPreview(tempTextInputField.getText().toString());
+
+
     }
+
 
 
 }

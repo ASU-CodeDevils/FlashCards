@@ -1,7 +1,6 @@
 package com.example.terin.asu_flashcardapp;
 
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,11 +38,8 @@ public class PreviewFragment extends Fragment {
      */
     public void setPreviewText(String previewText){
         tempTitleInput.setText(previewText);
-        /**
-         * Find how to update the string resource, or just leave the
-         * temptTitle as a hardcoded item, until this is executed?
-         */
 
-
+        //Find how to update the string resource, or just leave the
+        //temptTitle as a hardcoded item, until this is executed?
     }
 }
