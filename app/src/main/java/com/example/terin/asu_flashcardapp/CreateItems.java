@@ -1,13 +1,16 @@
 package com.example.terin.asu_flashcardapp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -44,16 +47,18 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         FragmentManager fragManage = getSupportFragmentManager();
         FragmentTransaction fragTrans = fragManage.beginTransaction();
         PreviewFragment previewFrag = new PreviewFragment();
+        TitleCreateFragment titleFrag = new TitleCreateFragment();
 
         //Bundle bundle = new Bundle();
         //The following ought to be "Old T." = tempTitleInput & "New T" = title
         ////bundle.putString("Old Text", "New Text");
         //previewFrag.setArguments(bundle);
 
+
         createCourse(titleString);
         previewFrag.setPreviewText(titleString);
-        fragTrans.add(R.id.fragment1, previewFrag);
-        fragTrans.commit();
+        fragTrans.add(R.id.fragment1, previewFrag).commit();
+        //fragTrans.add(R.id.fragment2, titleFrag).commit();
 
     }
 
@@ -99,4 +104,5 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         }
 
     }
+
 }

@@ -3,7 +3,6 @@ package com.example.terin.asu_flashcardapp;
 import android.app.Activity;
 import android.content.Context;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,7 @@ import android.widget.*;
 
 /**
  * Created by Stephanie on 5/31/17.
- * File that controls the fragment_create_title.xml file.
+ * File that controls the fragment_create_coursee.xml file.
  */
 
 public class TitleCreateFragment extends Fragment{
@@ -59,28 +58,25 @@ public class TitleCreateFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //This is where the change of EditText: tempInputText needs to be changed based on the button that got here.
+        View view = inflater.inflate(R.layout.fragment_create_input, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_create_title, container, false);
 
-        //Check the if running Android 5.0 or higher i.e Lollipop or other, used for Materials design.
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            //Material API's called.
+        //tempTextInputField.setHint("@string/deckInput");
 
-            view = inflater.inflate(R.layout.fragment_create_title, container, false);
-            tempTextInputField = (EditText) view.findViewById(R.id.tempTextInputField);
-            final Button createButton = (Button) view.findViewById(R.id.createButton);
 
-            createButton.setOnClickListener(
-                    new View.OnClickListener(){
-                        public void onClick(View view){
-                            buttonClicked(view);
-                        }
+
+
+        Button createButton = (Button) view.findViewById(R.id.createButton);
+
+        createButton.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View view){
+                        buttonClicked(view);
                     }
-            );
+                }
+        );
 
-        }else{
-            //Implement this feature with out Material design.
-        }
 
       return view;
     }
@@ -91,7 +87,6 @@ public class TitleCreateFragment extends Fragment{
      */
     public void buttonClicked(View view){
         activityCommander.createPreview(tempTextInputField.getText().toString());
-
 
     }
 

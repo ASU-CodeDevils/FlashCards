@@ -35,6 +35,7 @@
         <activity android:name=".StudyWindow"></activity>
         <activity android:name=".UserStats"></activity>
         <activity android:name=".CreateItems"></activity>
+        <activity android:name=".CreateOptions"></activity>
     </application>
 
 </manifest>

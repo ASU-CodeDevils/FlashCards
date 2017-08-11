@@ -27,5 +27,7 @@
     <!-- Create fragment code -->
     <string name="createButton">Create</string>
     <string name="tempInputTitle">User Title Goes Here</string>
+    <string name="cardInput">Enter card information here.</string>
+    <string name="deckInput">Enter deck title here.</string>
     <string name="title"></string>
 </resources>
