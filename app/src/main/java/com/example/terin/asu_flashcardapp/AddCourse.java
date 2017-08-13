@@ -1,5 +1,6 @@
 package com.example.terin.asu_flashcardapp;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 
 public class AddCourse extends AppCompatActivity {
 
-    //private static EditText editText;
     private static TextView textView;
     private static EditText editText;
     private static Intent startOptionsActivity;
@@ -24,8 +24,23 @@ public class AddCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
 
+//<<<<<<< Updated upstream
         Button courseAcceptButton = (Button) findViewById(R.id.courseAcceptButton);
         editText = (EditText) findViewById(R.id.newCourseName);
+//=======
+        //Check the if running Android 5.0 or higher i.e Lollipop or other, used for Materials design.
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            //Material API's called.
+
+        }else{
+            //Implement this feature with out Material design.
+        }
+
+        /*
+
+>>>>>>> Stashed changes
+*/
+        //Button courseAcceptButton = (Button) findViewById(R.id.courseAcceptButton);
         textView = (TextView) findViewById(R.id.prevCourseName);
 
         courseAcceptButton.setOnClickListener(

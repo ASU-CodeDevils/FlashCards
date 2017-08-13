@@ -15,7 +15,7 @@
     </string>
 
     <!--Options Activity strings -->
-    <string name="create_new_course">Create New Course</string>
+    <string name="create_new_course">Create New</string>
     <string name="goto_study">Go Study</string>
     <string name="goto_stats">View Stats</string>
 
@@ -23,4 +23,11 @@
     <string name="acceptCourseButton">Create Course</string>
     <string name="prevCourseName">Temp Course Name</string>
     <string name="createCourseName">Enter course Name</string>
+
+    <!-- Create fragment code -->
+    <string name="createButton">Create</string>
+    <string name="tempInputTitle">User Title Goes Here</string>
+    <string name="cardInput">Enter card information here.</string>
+    <string name="deckInput">Enter deck title here.</string>
+    <string name="title"></string>
 </resources>

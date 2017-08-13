@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.terin.asu_flashcardapp">
 
+    <!-- Allows access to other API levels for backwards compatibility
+    <uses-sdk android:minSdkVersion="15"
+        android:targetSdkVersion="21"
+        android:maxSdkVersion="25" />
+    -->
+
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -26,6 +33,9 @@
         <activity android:name=".AddCourse"></activity>
         <activity android:name=".Options"></activity>
         <activity android:name=".StudyWindow"></activity>
+        <activity android:name=".UserStats"></activity>
+        <activity android:name=".CreateItems"></activity>
+        <activity android:name=".CreateOptions"></activity>
     </application>
 
 </manifest>
