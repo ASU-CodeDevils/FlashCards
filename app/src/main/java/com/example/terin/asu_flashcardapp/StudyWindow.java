@@ -1,13 +1,10 @@
 package com.example.terin.asu_flashcardapp;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +38,7 @@ public class StudyWindow extends AppCompatActivity{
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study);
+        setContentView(R.layout.activity_courses);
 
         DBHandler myDb = new DBHandler(this);
 
