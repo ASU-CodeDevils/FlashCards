@@ -26,7 +26,7 @@ public class Card {
         this.deckId = deckId;
         this.authorId = authorId;
 
-        for(int i = 0 ; i < wrongs.length ; i++){
+        for(int i = 0 ; i < wrongs.length || wrongs[i]==null; i++){
             this.wrongs.add(wrongs[i]);
         }
 
@@ -42,10 +42,8 @@ public class Card {
     }
 
     public void incrementCorrectCount() {
-
         //will probably want to do other things here like updating stats or db info
         correctCount++;
-
     }
 
     public void incrementTotalCount() {
@@ -128,7 +126,5 @@ public class Card {
         this.authorId = authorId;
     }
 
-    private void setCreateDate(Date createDate) {
-
-    }
+    public void setCreateDate(Date createDate) {this.createDate = createDate;}
 }
