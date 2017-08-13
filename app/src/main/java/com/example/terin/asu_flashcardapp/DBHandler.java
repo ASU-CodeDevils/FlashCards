@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.Date;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    String TAG = "TerinTest";
+    String TAG = "AntonioTesting";
     //All Static variables
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FlashCardDB";
@@ -36,6 +37,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CREATE_DATE = "createDate";
     private static final String DECK_ID = "_deckId";
     private static final String DECK_NAME = "deckName";
+    private static DateFormat dbDateFormat;
+    private static Date currentDate;
     private static final String CARD_ID = "_cardId";
     private static final String CARD_QUESTION = "cardQuestion";
     private static final String CORRECT = "correct";
@@ -112,11 +115,11 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COURSE_NAME, courseName);
         values.put(AUTHOR_ID, 1);
-        values.put(CREATE_DATE, 05/20/2017);
+        values.put(CREATE_DATE, getCreateDate());
 
         db.insert(TABLE_COURSE_DETAIL, null, values);
 
-        Log.d(TAG, "addCourse: " + courseName);
+        Log.i(TAG, "addCourse: " + courseName);
         db.close();
 
         //Testing adding Decks
@@ -137,16 +140,15 @@ public class DBHandler extends SQLiteOpenHelper {
 
         value = db.delete(TABLE_COURSE_DETAIL, COURSE_ID + "=" + courseID, null) > 0;
 
-        Log.d(TAG, "deleteCourse: " + courseID);
+        Log.i(TAG, "deleteCourse: " + courseID);
         db.close();
 
         return value;
-
     }
 
     //Get courses
     public ArrayList<Course> getCourses(){
-        ArrayList<Course> courseList = new ArrayList<Course>();
+        ArrayList<Course> courseList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_COURSE_DETAIL;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -156,17 +158,26 @@ public class DBHandler extends SQLiteOpenHelper {
         //loop through all rows to return
         while(!cursor.isAfterLast()){
 
-                Course course = new Course(cursor.getString(1),Integer.parseInt(cursor.getString(2)));
-                course.set_courseId(Integer.parseInt(cursor.getString(0)));
+            Course course = new Course(cursor.getString(1),Integer.parseInt(cursor.getString(2)));
+            course.set_courseId(Integer.parseInt(cursor.getString(0)));
+            courseList.add(course);
 
-                Log.d(TAG, "Get Course: " + course.getCourseName() + course.get_courseId());
-                cursor.moveToNext();
+            //Log.i(TAG, "Get Course: " + course.getCourseName() + course.get_courseId());
+            cursor.moveToNext();
         }
 
-        Log.d(TAG, "Return All Courses");
+        //Log.i(TAG, "Return All Courses");
         db.close();
 
         return courseList;
+    }
+
+    // Antonio Added for StudyWindow courses collection view
+    // May be unnecessary
+    public Cursor getCoursesViewList() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("select " + COURSE_ID + ", " + COURSE_NAME + " from " + TABLE_COURSE_DETAIL, null);
+        return result;
     }
 
     //Add deck to DB
@@ -177,11 +188,11 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(DECK_NAME, deckName);
         values.put(COURSE_ID, courseID);
         values.put(AUTHOR_ID, 1);
-        values.put(CREATE_DATE, 05/20/2017);
+        values.put(CREATE_DATE, getCreateDate());
 
         db.insert(TABLE_DECK_DETAIL, null, values);
 
-        Log.d(TAG, "addDeck: " + deckName);
+        Log.i(TAG, "addDeck: " + deckName);
         db.close();
 
     }
@@ -194,7 +205,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         value = db.delete(TABLE_DECK_DETAIL, DECK_ID + "=" + deckID, null) > 0;
 
-        Log.d(TAG, "deleteDeck: " + deckID);
+        Log.i(TAG, "deleteDeck: " + deckID);
         db.close();
 
         return value;
@@ -214,16 +225,22 @@ public class DBHandler extends SQLiteOpenHelper {
         while(!cursor.isAfterLast()){
             Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
 
-            Log.d(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
+            Log.i(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
             cursor.moveToNext();
         }
 
-        Log.d(TAG, "Return All Decks");
+        Log.i(TAG, "Return All Decks");
         db.close();
 
         return deckList;
     }
 
+    public String getCreateDate () {
+        dbDateFormat = new SimpleDateFormat ("MM/dd/yyyy HH:mm:ss");
+        currentDate = new Date();
+
+        return dbDateFormat.format(currentDate);
+    }
 
     //Add card to DB
     public void addCard(String cardQuestion, String correct, int deckId) {
