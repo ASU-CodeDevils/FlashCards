@@ -31,9 +31,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                CreateOptions.class);
-                                //CreateItems.class);
-                                //AddCourse.class);
+                                AddCourse.class);
                         startActivity(startCreateActivity);
 
                     }
@@ -45,7 +43,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                LoginActivity.class);
+                                StudyWindow.class);
                         startActivity(startCreateActivity);
 
                     }
@@ -74,7 +72,6 @@ public class Options extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
 
         return true;
     }
