@@ -47,7 +47,7 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         FragmentManager fragManage = getSupportFragmentManager();
         FragmentTransaction fragTrans = fragManage.beginTransaction();
         PreviewFragment previewFrag = new PreviewFragment();
-        TitleCreateFragment titleFrag = new TitleCreateFragment();
+        //TitleCreateFragment titleFrag = new TitleCreateFragment();
 
         //Bundle bundle = new Bundle();
         //The following ought to be "Old T." = tempTitleInput & "New T" = title

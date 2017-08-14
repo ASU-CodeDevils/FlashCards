@@ -63,10 +63,6 @@ public class TitleCreateFragment extends Fragment{
 
 
         //tempTextInputField.setHint("@string/deckInput");
-
-
-
-
         Button createButton = (Button) view.findViewById(R.id.createButton);
 
         createButton.setOnClickListener(

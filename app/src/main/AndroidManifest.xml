@@ -32,10 +32,12 @@
         </activity>
         <activity android:name=".AddCourse"></activity>
         <activity android:name=".Options"></activity>
-        <activity android:name=".StudyWindow"></activity>
+        <activity android:name=".CourseList"></activity>
         <activity android:name=".UserStats"></activity>
         <activity android:name=".CreateItems"></activity>
         <activity android:name=".CreateOptions"></activity>
+        <activity android:name=".DeckList"></activity>
+        <activity android:name=".StudyWindow"></activity>
     </application>
 
 </manifest>

@@ -172,7 +172,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return courseList;
     }
 
-    // Antonio Added for StudyWindow courses collection view
+    // Antonio Added for CourseList courses collection view
     // May be unnecessary
     public Cursor getCoursesViewList() {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -30,4 +30,5 @@
     <string name="cardInput">Enter card information here.</string>
     <string name="deckInput">Enter deck title here.</string>
     <string name="title"></string>
+    <string name="study">Study</string>
 </resources>
