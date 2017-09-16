@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.ChangeFragListener, DeckCheckListFrag.ChangeFragListener{
 
-    String TAG = "Stephanie Testing";
+    String TAG = "StephanieTesting";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +60,12 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
 
         DBHandler myDb = new DBHandler(this);
 
-        ArrayList<Deck> decks = myDb.getDecks(2);
+        /**
+         * TODO:
+         * The following int value in getDecks() needs to be the number that corresponds with
+         * the selected deck's position in the course list array list.
+         */
+        ArrayList<Deck> decks = myDb.getDecks(1);
         String[] decksString = new String[decks.size()];
         Log.i(TAG, "Array Size: " + String.valueOf(decksString.length));
 //        Log.i(TAG, "ArrayList Size: " + String.valueOf(courses.size()));
@@ -89,6 +94,11 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         );
     }
 
+    /**
+     * This method will adjust the fragment from a plain list to a checkbox
+     * list, so the user may study multiple decks to study from.
+     * @param id
+     */
     public void changeFragment(int id){
         FragmentManager fragManage = getSupportFragmentManager();
         FragmentTransaction fragTrans = fragManage.beginTransaction();

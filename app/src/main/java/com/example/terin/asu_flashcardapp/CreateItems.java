@@ -56,8 +56,6 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         bundle.putString("Old Text", "New Text");
         previewFrag.setArguments(bundle);
 
-        System.out.println("HERE WE ARE: " + createType);
-
         switch (createType) {
             case 1:
                 createDeck(titleString);

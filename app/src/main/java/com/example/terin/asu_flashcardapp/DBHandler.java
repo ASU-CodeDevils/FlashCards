@@ -224,6 +224,8 @@ public class DBHandler extends SQLiteOpenHelper {
         //loop through all rows to return
         while(!cursor.isAfterLast()){
             Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            deck.set_deckId(Integer.parseInt(cursor.getString(0)));
+            deckList.add(deck);
 
             Log.i(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
             cursor.moveToNext();
