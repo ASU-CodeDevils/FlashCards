@@ -7,10 +7,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Stephanie on 8/13/17.
@@ -18,6 +25,7 @@ import android.widget.Button;
 
 public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.ChangeFragListener, DeckCheckListFrag.ChangeFragListener{
 
+    String TAG = "Stephanie Testing";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +53,36 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                         //This is where SnackBar confirm ought to happen.
                         Intent newWindow = new Intent(DeckList.this, StudyWindow.class);
                         startActivity(newWindow);
+                    }
+                }
+        );
+
+        DBHandler myDb = new DBHandler(this);
+
+        ArrayList<Deck> decks = myDb.getDecks(2);
+        String[] decksString = new String[decks.size()];
+        Log.i(TAG, "Array Size: " + String.valueOf(decksString.length));
+//        Log.i(TAG, "ArrayList Size: " + String.valueOf(courses.size()));
+        //ArrayList<String> coursesString = new ArrayList<>();
+
+        for(int i = 0; i < decksString.length; i++) {
+            decksString[i] = decks.get(i).getDeckName().toString();
+            Log.i(TAG, decksString[i]);
+        }
+
+        ListAdapter deckAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, decksString);
+        ListView decksListView = (ListView) findViewById(R.id.decksListView);
+        decksListView.setAdapter (deckAdapter);
+
+        decksListView.setOnItemClickListener (
+                new AdapterView.OnItemClickListener () {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                        //String course = String.valueOf(parent.getItemAtPosition(position));
+
+                        Intent deckPicked = new Intent(DeckList.this, StudyWindow.class);
+                        startActivity(deckPicked);
                     }
                 }
         );

@@ -20,6 +20,8 @@ import android.widget.EditText;
 public class CreateOptions extends AppCompatActivity {
 
     private static EditText tempTextInputField;
+    private static Intent switchThings;
+    public int buttonNum = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,16 +39,15 @@ public class CreateOptions extends AppCompatActivity {
         deckButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                        Intent startCreateActivity = new Intent(getApplicationContext(),
-                                AddCourse.class);
-                        //CreateItems.class);
-                        startActivity(startCreateActivity);
+                        switchThings = new Intent(CreateOptions.this,
+                                CreateItems.class);
+                        startActivity(switchThings);
+                        buttonNum = 1;
                     }
                 }
         );
 
         //The action listener for card button.
-
         cardButton.setOnClickListener(
                 /**
                  * TODO
@@ -55,10 +56,10 @@ public class CreateOptions extends AppCompatActivity {
                  */
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                        Intent startCreateActivity = new Intent(getApplicationContext(),
-                                AddCourse.class);
-                                //CreateItems.class);
-                        startActivity(startCreateActivity);
+                        switchThings = new Intent(CreateOptions.this,
+                                CreateItems.class);
+                        startActivity(switchThings);
+                        buttonNum = 2;
                     }
                 }
         );
@@ -67,10 +68,11 @@ public class CreateOptions extends AppCompatActivity {
         courseButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                        Intent startCreateActivity = new Intent(getApplicationContext(),
-                                AddCourse.class);
-                                //CreateItems.class);
-                        startActivity(startCreateActivity);
+                        switchThings = new Intent(CreateOptions.this,
+                                //AddCourse.class);
+                                CreateItems.class);
+                        startActivity(switchThings);
+                        buttonNum = 3;
                     }
                 }
         );

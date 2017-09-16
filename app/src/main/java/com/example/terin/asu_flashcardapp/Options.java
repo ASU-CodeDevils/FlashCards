@@ -28,7 +28,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                CreateItems.class);
+                                CreateOptions.class);
                         startActivity(startCreateActivity);
 
                     }

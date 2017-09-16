@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
+    public int createType = 0;
+
     /**
      * The activity that is set when this file is executed.
      * @param savedInstanceState The activity to be set.
@@ -94,6 +96,7 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         DBHandler db = new DBHandler(this);
         db.addCourse(courseName);
+        this.createType = createType;
 
         //This will probably close back to the Course List Screen.
 
@@ -101,6 +104,28 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         for(int i = 0 ; i < courses.size() ; i++){
             System.out.println("Course Name: " + courses.get(i).getCourseName());
+        }
+
+    }
+
+    /**
+     * This will allow decks to be added to the db.
+     * @param deckName the title of the course the user created.
+     */
+    private void createDeck(String deckName){
+
+        DBHandler db = new DBHandler(this);
+        db.addCourse(deckName);
+        this.createType = createType;
+
+        //This will probably close back to the Course List Screen.
+
+        //The numbwer 2 ought to be chosen from the coursList. (a number
+        //that corresponds to the name of the course.
+        ArrayList<Deck> decks = db.getDecks(2);
+
+        for(int i = 0 ; i < decks.size() ; i++){
+            System.out.println("Deck Name: " + decks.get(i).getDeckName());
         }
 
     }

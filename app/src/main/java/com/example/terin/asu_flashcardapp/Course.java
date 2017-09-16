@@ -13,13 +13,12 @@ import android.content.Intent;
 public class Course {
 
     private int _courseId;
-    private String courseName;
+    private String courseName, deckName;
     private int authorId;
     private Date createDate;
     private ArrayList <Deck> decks;
 
     public Course(String courseName, int authorId){
-
 
         this.courseName = courseName;
         this.authorId = authorId;
@@ -29,6 +28,8 @@ public class Course {
     //TODO: add a new deck
     public void addDeck(String deckName, int authorId){
 
+        this.deckName = deckName;
+        this.authorId = authorId;
     }
 
     //TODO: delete selected deck

@@ -17,8 +17,6 @@ public class Deck {
     private int authorId;
     private Date createDate;
 
-
-
     private ArrayDeque <Card> cards;
 
     public Deck(int deckID, int courseId, String deckName, int authorId){
