@@ -5,6 +5,7 @@ import android.content.Context;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,8 +62,8 @@ public class TitleCreateFragment extends Fragment{
         //This is where the change of EditText: tempInputText needs to be changed based on the button that got here.
         View view = inflater.inflate(R.layout.fragment_create_input, container, false);
 
-
-        //tempTextInputField.setHint("@string/deckInput");
+        //Somehow need to make next line dynamically change the preview text based on which option brought us to this window.
+        tempTextInputField = (EditText) view.findViewById(R.id.tempTextInputField);
         Button createButton = (Button) view.findViewById(R.id.createButton);
 
         createButton.setOnClickListener(

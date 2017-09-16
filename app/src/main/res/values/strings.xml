@@ -31,4 +31,14 @@
     <string name="deckInput">Enter deck title here.</string>
     <string name="title"></string>
     <string name="study">Study</string>
+
+
+    <!-- Test decks for multiple check boxes on fragment_decklist_checks -->
+    <string-array name="testdecks">
+        <item>SER 100</item>
+        <item>SER 200</item>
+        <item>SER 215</item>
+        <item>SER 222</item>
+    </string-array>
+
 </resources>

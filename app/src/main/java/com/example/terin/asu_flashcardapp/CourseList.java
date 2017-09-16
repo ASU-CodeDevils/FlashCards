@@ -37,7 +37,7 @@ public class CourseList extends AppCompatActivity{
 
         ArrayList<Course> courses = myDb.getCourses();
         String[] coursesString = new String[courses.size()];
-//        Log.i(TAG, "Array Size: " + String.valueOf(coursesString.length));
+        Log.i(TAG, "Array Size: " + String.valueOf(coursesString.length));
 //        Log.i(TAG, "ArrayList Size: " + String.valueOf(courses.size()));
         //ArrayList<String> coursesString = new ArrayList<>();
 
