@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
-    public int createType = 0;
+    public static int createType = 0;
 
     /**
      * The activity that is set when this file is executed.
@@ -56,11 +56,24 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         bundle.putString("Old Text", "New Text");
         previewFrag.setArguments(bundle);
 
+        System.out.println("HERE WE ARE: " + createType);
 
-        createCourse(titleString);
+        switch (createType) {
+            case 1:
+                createDeck(titleString);
+                break;
+            case 2:
+                createCard(titleString);
+                break;
+            case 3:
+                createCourse(titleString);
+                break;
+            default:
+                System.out.println("This is an invalid number of createType.");
+        }
+
         previewFrag.setPreviewText(titleString);
         fragTrans.add(R.id.fragment1, previewFrag).commit();
-        //fragTrans.add(R.id.fragment2, titleFrag).commit();
 
     }
 
@@ -110,24 +123,54 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
     /**
      * This will allow decks to be added to the db.
-     * @param deckName the title of the course the user created.
+     * @param deckName The title of the deck the user created.
      */
     private void createDeck(String deckName){
 
         DBHandler db = new DBHandler(this);
-        db.addCourse(deckName);
+        db.addDeck(deckName, createType);
         this.createType = createType;
 
         //This will probably close back to the Course List Screen.
 
-        //The numbwer 2 ought to be chosen from the coursList. (a number
+        //The number 2 ought to be chosen from the coursList. (a number
         //that corresponds to the name of the course.
-        ArrayList<Deck> decks = db.getDecks(2);
+        ArrayList<Deck> decks = db.getDecks(createType);
 
         for(int i = 0 ; i < decks.size() ; i++){
             System.out.println("Deck Name: " + decks.get(i).getDeckName());
         }
 
+    }
+
+    /**
+     * This will allow cards to be added to the db.
+     * @param cardName The title of the cardthe user created.
+     */
+    private void createCard(String cardName){
+
+        DBHandler db = new DBHandler(this);
+        db.addCard(cardName, "placeHolder string", 0);
+        this.createType = createType;
+
+        //This will probably close back to the Course List Screen.
+
+        //The number 2 ought to be chosen from the coursList. (a number
+        //that corresponds to the name of the course.
+        ArrayList<Card> cards = db.getCards(createType);
+
+        for(int i = 0 ; i < cards.size() ; i++){
+            System.out.println("Card Name: " + cards.get(i).getCardQuestion());
+        }
+
+    }
+
+    public static int getCreateType(){
+        return createType;
+    }
+
+    public static void setCreateType(int buttonNum) {
+        createType = buttonNum;
     }
 
 }

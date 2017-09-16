@@ -45,7 +45,7 @@ public class AddDeck extends AppCompatActivity {
                     @Override
                     public void onClick(View view){
                         createDeck(editText.getText().toString(), 1);
-                        switchThings = new Intent(AddDeck.this, Options.class);
+                        switchThings = new Intent(AddDeck.this, DeckList.class);
                         startActivity(switchThings);
                     }
                 }

@@ -39,10 +39,11 @@ public class CreateOptions extends AppCompatActivity {
         deckButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
+                        buttonNum = 1;
                         switchThings = new Intent(CreateOptions.this,
                                 CreateItems.class);
+                        CreateItems.setCreateType(buttonNum);
                         startActivity(switchThings);
-                        buttonNum = 1;
                     }
                 }
         );
@@ -56,10 +57,11 @@ public class CreateOptions extends AppCompatActivity {
                  */
                 new Button.OnClickListener(){
                     public void onClick(View v){
+                        buttonNum = 2;
                         switchThings = new Intent(CreateOptions.this,
                                 CreateItems.class);
+                        CreateItems.setCreateType(buttonNum);
                         startActivity(switchThings);
-                        buttonNum = 2;
                     }
                 }
         );
@@ -68,11 +70,12 @@ public class CreateOptions extends AppCompatActivity {
         courseButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
+                        buttonNum = 3;
                         switchThings = new Intent(CreateOptions.this,
                                 //AddCourse.class);
                                 CreateItems.class);
+                        CreateItems.setCreateType(buttonNum);
                         startActivity(switchThings);
-                        buttonNum = 3;
                     }
                 }
         );

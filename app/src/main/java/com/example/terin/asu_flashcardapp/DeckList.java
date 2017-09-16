@@ -41,6 +41,7 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         createButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View view){
+                        //THIS WILL NEED TO GO TO THE ADDCARD.JAVA CLASS
                         Intent switchThings = new Intent(DeckList.this, CreateItems.class);
                         startActivity(switchThings);
                     }
@@ -109,13 +110,6 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         }
 
     }
-
-    /**
-     * TODO:
-     * Add the code here for working with the db.
-     */
-
-
 
     /**
      * Method to maintain a unified menu across all screens.
