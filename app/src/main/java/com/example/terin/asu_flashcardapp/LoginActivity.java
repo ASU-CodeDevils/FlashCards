@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         //Check the if running Android 5.0 or higher i.e Lollipop or other, used for Materials design.
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            //Material API's called.
+            // Material API's called.
 
         }else{
             //Implement this feature with out Material design.
@@ -207,7 +207,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
     }
 
     private boolean isPasswordValid(String password) {
