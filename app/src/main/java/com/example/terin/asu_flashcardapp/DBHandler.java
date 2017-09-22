@@ -43,7 +43,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CARD_QUESTION = "cardQuestion";
     private static final String CORRECT = "correct";
     private static final String CORRECT_COUNT = "correctCount";
-    private static final String TOTAL_COUNT = "cardQuestion";
+    private static final String TOTAL_COUNT = "totalCount";
     private static final String WRONG_ID = "_wrongId";
     private static final String WRONG = "wrong";
 
@@ -82,17 +82,21 @@ public class DBHandler extends SQLiteOpenHelper {
                 + TOTAL_COUNT + " INTEGER, "
                 + AUTHOR_ID + " INTEGER, "
                 + CREATE_DATE + " DATE, "
-                + "FOREIGN KEY(" + DECK_ID + ") REFERENCES " + TABLE_DECK_DETAIL + "(" + DECK_ID + "));";
+                + "FOREIGN KEY(" + DECK_ID
+                + ") REFERENCES " + TABLE_DECK_DETAIL
+                + "(" + DECK_ID + "));";
 
         db.execSQL(CREATE_CARD_DETAIL_TABLE);
 
-        String CREATE_WRONG_DETAIL_TABLE = "CREATE TABLE " + TABLE_WRONG_DETAIL + "("
+        String CREATE_WRONG_DETAIL_TABLE = "CREATE TABLE "
+                + TABLE_WRONG_DETAIL + "("
                 + WRONG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CARD_ID + " INTEGER, "
                 + WRONG + " TEXT, "
-                + "FOREIGN KEY(" + CARD_ID + ") REFERENCES " + TABLE_CARD_DETAIL + "(" + CARD_ID + "));";
+                + "FOREIGN KEY(" + CARD_ID + ") REFERENCES "
+                + TABLE_CARD_DETAIL + "(" + CARD_ID + "));";
 
-        db.execSQL(CREATE_CARD_DETAIL_TABLE);
+        db.execSQL(CREATE_WRONG_DETAIL_TABLE);
     }
 
     @Override
@@ -193,6 +197,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_DECK_DETAIL, null, values);
 
         Log.i(TAG, "addDeck: " + deckName);
+        Log.i(TAG, "courseID: " + courseID);
         db.close();
 
     }
@@ -223,8 +228,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //loop through all rows to return
         while(!cursor.isAfterLast()){
+            //Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
             Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
             deck.set_deckId(Integer.parseInt(cursor.getString(0)));
+            //deck.setCourseId(Integer.parseInt(cursor.getString(0)));
             deckList.add(deck);
 
             Log.i(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
@@ -294,19 +301,19 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //loop through all rows to return
         while(!cursor.isAfterLast()){
-            /*
+
         String CREATE_CARD_DETAIL_TABLE = "CREATE TABLE " + TABLE_CARD_DETAIL + "("
             // below is column indexes.
-             0   + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-             1   + DECK_ID + " INTEGER, "
-             2   + CARD_QUESTION + " TEXT, "
-             3   + CORRECT + " TEXT, "
-             4   + CORRECT_COUNT + " INTEGER, "
-             5   + TOTAL_COUNT + " INTEGER, "
-             6   + AUTHOR_ID + " INTEGER, "
-             7   + CREATE_DATE + " DATE, "
+            + 0   + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + 1   + DECK_ID + " INTEGER, "
+            + 2   + CARD_QUESTION + " TEXT, "
+            + 3   + CORRECT + " TEXT, "
+            + 4   + CORRECT_COUNT + " INTEGER, "
+            + 5   + TOTAL_COUNT + " INTEGER, "
+            + 6   + AUTHOR_ID + " INTEGER, "
+            + 7   + CREATE_DATE + " DATE, "
                 + "FOREIGN KEY(" + DECK_ID + ") REFERENCES " + TABLE_DECK_DETAIL + "(" + DECK_ID + "));";
-            */
+
             Wrong wrongs[] = new Wrong[10]; // need to populate after making getWrongs method
 
             //Card(String cardQuestion, String correct, Wrong[] wrongs, int deckId, int authorId){
@@ -316,7 +323,7 @@ public class DBHandler extends SQLiteOpenHelper {
             card.set_cardId(Integer.parseInt(cursor.getString(0)));
             //Date c = new Date(cursor.getLong(7));
             //card.setCreateDate(c);
-            Log.d(TAG, "Get Card: " + card.getCardQuestion() + " CardID: " + card.get_cardId() + " DeckID: " + card.getDeckId());
+            //Log.d(TAG, "Get Card: " + card.getCardQuestion() + " CardID: " + card.get_cardId() + " DeckID: " + card.getDeckId());
             cursor.moveToNext();
         }
 

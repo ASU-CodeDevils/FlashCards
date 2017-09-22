@@ -65,6 +65,7 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
          * The following int value in getDecks() needs to be the number that corresponds with
          * the selected deck's position in the course list array list.
          */
+
         ArrayList<Deck> decks = myDb.getDecks(1);
         String[] decksString = new String[decks.size()];
         Log.i(TAG, "Array Size: " + String.valueOf(decksString.length));
@@ -90,6 +91,8 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                         Intent deckPicked = new Intent(DeckList.this, StudyWindow.class);
                         startActivity(deckPicked);
                     }
+
+
                 }
         );
     }

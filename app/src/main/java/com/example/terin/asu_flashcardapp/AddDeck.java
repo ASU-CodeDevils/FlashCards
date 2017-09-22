@@ -25,6 +25,12 @@ public class AddDeck extends AppCompatActivity {
     private static TextView textView;
     private static EditText editText;
     private static Intent switchThings;
+    private static int deckId;
+    private static int courseId;
+    private static String deckName;
+    private static int authorId;
+
+    private Deck deck = new Deck(this.deckId, this.courseId, this.deckName, this.authorId);
 
     String TAG = "Stephanie Testing: ";
 
@@ -38,13 +44,16 @@ public class AddDeck extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.newCourseName);
 
         textView = (TextView) findViewById(R.id.prevCourseName);
+        deckId = deck.get_deckId();
+        courseId = deck.getCourseId();
+        System.out.println("Here is course ID from AddDeck: " + courseId);
 
         deckAcceptButton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View view){
-                        createDeck(editText.getText().toString(), 1);
+                        createDeck(editText.getText().toString(), courseId);
                         switchThings = new Intent(AddDeck.this, DeckList.class);
                         startActivity(switchThings);
                     }
@@ -68,7 +77,11 @@ public class AddDeck extends AppCompatActivity {
         for(int i = 0 ; i < decks.size() ; i++){
             Log.i(TAG, "AddDeck.java");
             System.out.println("Deck Name: " + decks.get(i).getDeckName());
+            System.out.println("Here is deck: " + deckId + " CourseId: " +
+                    courseId );
         }
+
+
     }
 
     @Override
