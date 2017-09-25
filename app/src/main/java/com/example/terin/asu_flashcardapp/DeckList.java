@@ -47,6 +47,7 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                     public void onClick(View view){
                         //THIS WILL NEED TO GO TO THE ADDCARD.JAVA CLASS
                         Intent switchThings = new Intent(DeckList.this, CreateItems.class);
+                        CreateItems.setCreateType(1);
                         startActivity(switchThings);
                     }
                 }
@@ -63,7 +64,6 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         );
 
         DBHandler myDb = new DBHandler(this);
-        ArrayList<Course> courseTest = new ArrayList<Course>();
         /**
          * TODO:
          * The following int value in getDecks() needs to be the number that corresponds with

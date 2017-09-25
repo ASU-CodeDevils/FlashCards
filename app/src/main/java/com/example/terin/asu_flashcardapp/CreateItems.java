@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
     public static int createType = 0;
-    Deck course = new Deck();
+    Deck course = Deck.getDeckInstance();
     public int courseID = course.getCourseId();
     public int creationTypeFromOpts = 0;
 
@@ -41,8 +41,10 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         CreateItems item = new CreateItems();
         creationTypeFromOpts = Integer.valueOf(item.getCreateType());
-        System.out.println("HERE WE ARE Create Items type: " + creationTypeFromOpts);
+        //System.out.println("HERE WE ARE Create Items type: " + creationTypeFromOpts);
+        System.out.println("CREATE ITEMS course id on create: " + courseID);
     }
+
 
     /**
      * This is called by the bottom fragment, TitleCreateFragment,
@@ -126,6 +128,8 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         //This will probably close back to the Course List Screen.
 
         ArrayList<Course> courses = db.getCourses();
+        System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
+        createType = 0;
 
         //for(int i = 0 ; i < courses.size() ; i++){
             //System.out.println("CreateItems Course Name: " + courses.get(i).getCourseName());
@@ -145,24 +149,26 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         //This will probably close back to the Course List Screen.
 
         ArrayList<Deck> decks = db.getDecks(courseID);
+        createType = 0;
 
         System.out.println("HERE IS Create Items course ID createDeck method: " + courseID);
-
-        for(int i = 0 ; i < decks.size() ; i++){
-            System.out.println("Create Items Deck Name: " + decks.get(i).getDeckName());
-        }
+        System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
+        //for(int i = 0 ; i < decks.size() ; i++){
+        //    System.out.println("Create Items Deck Name: " + decks.get(i).getDeckName());
+        //}
 
     }
 
     /**
      * This will allow cards to be added to the db.
-     * @param cardName The title of the cardthe user created.
+     * @param cardName The title of the card the user created.
      */
     private void createCard(String cardName){
 
         DBHandler db = new DBHandler(this);
         db.addCard(cardName, "placeHolder string", 0);
         this.createType = createType;
+        createType = 0;
 
         //This will probably close back to the Course List Screen.
 
