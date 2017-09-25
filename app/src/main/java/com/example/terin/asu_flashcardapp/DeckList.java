@@ -26,6 +26,9 @@ import java.util.ArrayList;
 public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.ChangeFragListener, DeckCheckListFrag.ChangeFragListener{
 
     String TAG = "StephanieTesting";
+    Deck course = Deck.getDeckInstance();
+    public int courseID = course.getCourseId();
+    public int deckID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +38,10 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         Button createButton = (Button) findViewById(R.id.createButton);
         Button studyButton = (Button) findViewById(R.id.studyButton);
 
-        /*
-        Alter CreateItems.java to create Decks rather than Courses.
-         */
+        System.out.println("DeckList HERE IS COURSE ID: " + courseID);
+        System.out.println("DeckList HERE IS DeckID: " + deckID);
+
+
         createButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View view){
@@ -59,21 +63,23 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         );
 
         DBHandler myDb = new DBHandler(this);
-
+        ArrayList<Course> courseTest = new ArrayList<Course>();
         /**
          * TODO:
          * The following int value in getDecks() needs to be the number that corresponds with
          * the selected deck's position in the course list array list.
          */
-        ArrayList<Deck> decks = myDb.getDecks(1);
+        ArrayList<Deck> decks = myDb.getDecks(courseID);
+
+        //courseTest.get(courseIDTest);
         String[] decksString = new String[decks.size()];
-        Log.i(TAG, "Array Size: " + String.valueOf(decksString.length));
+        //Log.i(TAG, "Array Size: " + String.valueOf(decksString.length));
 //        Log.i(TAG, "ArrayList Size: " + String.valueOf(courses.size()));
         //ArrayList<String> coursesString = new ArrayList<>();
 
         for(int i = 0; i < decksString.length; i++) {
             decksString[i] = decks.get(i).getDeckName().toString();
-            Log.i(TAG, decksString[i]);
+            //Log.i(TAG, "HERE WE ARE DeckList DeckName: " + decksString[i]);
         }
 
         ListAdapter deckAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, decksString);

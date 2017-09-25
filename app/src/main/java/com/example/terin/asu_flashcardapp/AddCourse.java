@@ -77,7 +77,7 @@ public class AddCourse extends AppCompatActivity {
         ArrayList<Course> courses = db.getCourses();
 
         for(int i = 0 ; i < courses.size() ; i++){
-            System.out.println("Course Name: " + courses.get(i).getCourseName());
+            System.out.println(" AddCourse Course Name: " + courses.get(i).getCourseName());
         }
 
     }

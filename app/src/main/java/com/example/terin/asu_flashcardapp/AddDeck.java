@@ -26,6 +26,9 @@ public class AddDeck extends AppCompatActivity {
     private static EditText editText;
     private static Intent switchThings;
 
+    Deck course = Deck.getDeckInstance();
+    public int courseID = course.getCourseId();
+
     String TAG = "Stephanie Testing: ";
 
     @Override
@@ -38,13 +41,14 @@ public class AddDeck extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.newCourseName);
 
         textView = (TextView) findViewById(R.id.prevCourseName);
+        //System.out.println("HERE WE ARE COURSE ID: " + courseID);
 
         deckAcceptButton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View view){
-                        createDeck(editText.getText().toString(), 1);
+                        createDeck(editText.getText().toString(), courseID);
                         switchThings = new Intent(AddDeck.this, DeckList.class);
                         startActivity(switchThings);
                     }
@@ -59,6 +63,7 @@ public class AddDeck extends AppCompatActivity {
      * @param deckNumber The number of the deck from the courseList.
      */
     public void createDeck(String deckName, int deckNumber) {
+        System.out.println("HERE IS AddDeck DECKNUMBER: " + deckNumber);
 
         DBHandler db = new DBHandler(this);
         db.addDeck(deckName, deckNumber);
@@ -66,8 +71,8 @@ public class AddDeck extends AppCompatActivity {
         ArrayList<Deck> decks = db.getDecks(deckNumber);
 
         for(int i = 0 ; i < decks.size() ; i++){
-            Log.i(TAG, "AddDeck.java");
-            System.out.println("Deck Name: " + decks.get(i).getDeckName());
+            Log.i(TAG, "AddDeck courseID: " + courseID);
+            System.out.println("AddDeck Deck Name: " + decks.get(i).getDeckName() + "Course ID: " + courseID);
         }
     }
 

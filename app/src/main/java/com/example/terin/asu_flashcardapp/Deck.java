@@ -16,8 +16,13 @@ public class Deck {
     private String deckName;
     private int authorId;
     private Date createDate;
+    private static Deck deckInstance = null;
 
     private ArrayDeque <Card> cards;
+
+    protected Deck() {
+
+    }
 
     public Deck(int deckID, int courseId, String deckName, int authorId){
 
@@ -26,6 +31,21 @@ public class Deck {
         this.courseId = courseId;
         this.authorId = authorId;
 
+    }
+
+    /**
+     * The following method executes the Singleton design. This allows
+     * instances of deck to be created package wide, which allows for the
+     * course ID number to be maintained across multiple classes within the package.
+     * @return
+     */
+    public static Deck getDeckInstance() {
+
+        if(deckInstance == null){
+            deckInstance = new Deck();
+        }
+
+        return deckInstance;
     }
 
     //TODO: add a new card

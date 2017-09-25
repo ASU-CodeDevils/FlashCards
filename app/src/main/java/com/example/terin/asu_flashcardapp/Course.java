@@ -18,6 +18,8 @@ public class Course {
     private Date createDate;
     private ArrayList <Deck> decks;
 
+    public Course() {}
+
     public Course(String courseName, int authorId){
 
         this.courseName = courseName;

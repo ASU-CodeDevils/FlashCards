@@ -26,6 +26,9 @@ import java.util.ArrayList;
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
     public static int createType = 0;
+    Deck course = new Deck();
+    public int courseID = course.getCourseId();
+    public int creationTypeFromOpts = 0;
 
     /**
      * The activity that is set when this file is executed.
@@ -36,6 +39,9 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
+        CreateItems item = new CreateItems();
+        creationTypeFromOpts = Integer.valueOf(item.getCreateType());
+        System.out.println("HERE WE ARE Create Items type: " + creationTypeFromOpts);
     }
 
     /**
@@ -56,18 +62,26 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         bundle.putString("Old Text", "New Text");
         previewFrag.setArguments(bundle);
 
+
+        System.out.println("Create Items course ID: " + courseID);
         switch (createType) {
             case 1:
-                createDeck(titleString);
+                createDeck(titleString, courseID);
+                System.out.println("CREATE ITEMS CASE 1: " + createType);
                 break;
             case 2:
                 createCard(titleString);
+                System.out.println("CREATE ITEMS CASE 2: " + createType);
                 break;
             case 3:
                 createCourse(titleString);
+                System.out.println("CREATE ITEMS CASE 2: " + createType);
                 break;
             default:
-                System.out.println("This is an invalid number of createType.");
+                CreateItems.setCreateType(createType);
+                System.out.println("HERE WE ARE Create Items CreateType Default Case: " + createType);
+                System.out.println("OR This is an invalid number of createType.");
+                break;
         }
 
         previewFrag.setPreviewText(titleString);
@@ -113,9 +127,9 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         ArrayList<Course> courses = db.getCourses();
 
-        for(int i = 0 ; i < courses.size() ; i++){
-            System.out.println("Course Name: " + courses.get(i).getCourseName());
-        }
+        //for(int i = 0 ; i < courses.size() ; i++){
+            //System.out.println("CreateItems Course Name: " + courses.get(i).getCourseName());
+        //}
 
     }
 
@@ -123,20 +137,19 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
      * This will allow decks to be added to the db.
      * @param deckName The title of the deck the user created.
      */
-    private void createDeck(String deckName){
+    private void createDeck(String deckName, int courseID){
 
         DBHandler db = new DBHandler(this);
-        db.addDeck(deckName, createType);
-        this.createType = createType;
+        db.addDeck(deckName, courseID);
 
         //This will probably close back to the Course List Screen.
 
-        //The number 2 ought to be chosen from the coursList. (a number
-        //that corresponds to the name of the course.
-        ArrayList<Deck> decks = db.getDecks(createType);
+        ArrayList<Deck> decks = db.getDecks(courseID);
+
+        System.out.println("HERE IS Create Items course ID createDeck method: " + courseID);
 
         for(int i = 0 ; i < decks.size() ; i++){
-            System.out.println("Deck Name: " + decks.get(i).getDeckName());
+            System.out.println("Create Items Deck Name: " + decks.get(i).getDeckName());
         }
 
     }

@@ -41,7 +41,8 @@ public class CreateOptions extends AppCompatActivity {
                     public void onClick(View v){
                         buttonNum = 1;
                         switchThings = new Intent(CreateOptions.this,
-                                CreateItems.class);
+                                CourseList.class);
+                                //CreateItems.class);
                         CreateItems.setCreateType(buttonNum);
                         startActivity(switchThings);
                     }
@@ -79,6 +80,8 @@ public class CreateOptions extends AppCompatActivity {
                     }
                 }
         );
+        System.out.println("HERE WE ARE Create Options type: " + buttonNum);
+        buttonNum = 0;
 
     }
 

@@ -43,7 +43,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CARD_QUESTION = "cardQuestion";
     private static final String CORRECT = "correct";
     private static final String CORRECT_COUNT = "correctCount";
-    private static final String TOTAL_COUNT = "cardQuestion";
+    private static final String TOTAL_COUNT = "totalCount";
     private static final String WRONG_ID = "_wrongId";
     private static final String WRONG = "wrong";
 
@@ -92,7 +92,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + WRONG + " TEXT, "
                 + "FOREIGN KEY(" + CARD_ID + ") REFERENCES " + TABLE_CARD_DETAIL + "(" + CARD_ID + "));";
 
-        db.execSQL(CREATE_CARD_DETAIL_TABLE);
+        db.execSQL(CREATE_WRONG_DETAIL_TABLE);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_COURSE_DETAIL, null, values);
 
-        Log.i(TAG, "addCourse: " + courseName);
+        Log.i(TAG, "DBHandler addCourse: " + courseName);
         db.close();
 
         //Testing adding Decks
@@ -140,7 +140,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         value = db.delete(TABLE_COURSE_DETAIL, COURSE_ID + "=" + courseID, null) > 0;
 
-        Log.i(TAG, "deleteCourse: " + courseID);
+        Log.i(TAG, "DBHandler deleteCourse: " + courseID);
         db.close();
 
         return value;
@@ -192,7 +192,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_DECK_DETAIL, null, values);
 
-        Log.i(TAG, "addDeck: " + deckName);
+        Log.i(TAG, "DB Handler addDeck: " + deckName);
+        Log.i(TAG, "DB courseID check addDeck: " + courseID);
         db.close();
 
     }
@@ -220,18 +221,22 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         cursor.moveToFirst();
-
+        System.out.println("DBHandler courseID in getDecks: " + courseID);
         //loop through all rows to return
         while(!cursor.isAfterLast()){
-            Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
-            deck.set_deckId(Integer.parseInt(cursor.getString(0)));
+            //Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
+            //        cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), courseID,
+                    cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            //deck.set_deckId(Integer.parseInt(cursor.getString(0)));
+            deck.set_deckId(courseID);
             deckList.add(deck);
 
-            Log.i(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
+            //Log.i(TAG, "HERE WE ARE CourseID: " + courseID);
             cursor.moveToNext();
         }
 
-        Log.i(TAG, "Return All Decks");
+        Log.i(TAG, "Return All Deck Names");
         db.close();
 
         return deckList;
