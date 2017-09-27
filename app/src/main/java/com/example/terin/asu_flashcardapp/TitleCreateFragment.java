@@ -40,10 +40,10 @@ public class TitleCreateFragment extends Fragment{
 
         if(context instanceof Activity) {
             activity = (Activity) context;
-            try {
+           try {
                 activityCommander = (TitleCreateListener) activity;
             } catch (ClassCastException e) {
-                throw new ClassCastException("\nTHERE'S AN ISSUE WITH ACTIVITY IN TITLECREATE.java.");
+                throw new ClassCastException("THERE'S AN ISSUE WITH ACTIVITY IN TITLECREATE.java.");
             }
         }
     }

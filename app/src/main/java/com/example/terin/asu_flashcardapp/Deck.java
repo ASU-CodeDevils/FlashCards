@@ -14,6 +14,7 @@ public class Deck {
     private int _deckId;
     private int courseId;
     private String deckName;
+    private String cardQuesiton;
     private int authorId;
     private Date createDate;
     private static Deck deckInstance = null;
@@ -37,7 +38,7 @@ public class Deck {
      * The following method executes the Singleton design. This allows
      * instances of deck to be created package wide, which allows for the
      * course ID number to be maintained across multiple classes within the package.
-     * @return
+     * @return An instance of a Deck object.
      */
     public static Deck getDeckInstance() {
 
@@ -53,6 +54,15 @@ public class Deck {
 
     }
 
+    /**
+     * Method to allow addition of addCard
+     * @param deckID The id of the deck the card is being added to.
+     */
+    public void addCard(String cardQuestion, int deckID) {
+        this._deckId = deckID;
+        this.cardQuesiton = cardQuestion;
+    }
+
     //TODO: delete selected card
     public void deleteCard(int cardId){
 
@@ -60,8 +70,6 @@ public class Deck {
 
     //TODO: generates next card out of deck
     public Card getNextCard() {
-
-
         return cards.getFirst();
 
     }

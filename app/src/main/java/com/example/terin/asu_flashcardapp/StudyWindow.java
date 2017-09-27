@@ -33,6 +33,14 @@ public class StudyWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study);
 
+        /*
+        Need to collect the cards, in random order from the selected deck and
+        display the information on the lined white flashcard. The textView from
+        the StudyWindow Activity is: cardInformation, and the variable from
+        the db handler is: cardQuestion.
+         */
+
+
         Button rightArrow = (Button) findViewById(R.id.rightButton);
         rightArrow.setOnClickListener(
                 new Button.OnClickListener(){

@@ -16,7 +16,7 @@ import android.content.Intent;
 import java.util.ArrayList;
 
 /**
- * Adds a Deck to a course.
+ * Adds a Deck to a course, via the Create button in DeckList.
  * Created by Stephanie on 9/16/17.
  */
 
@@ -34,7 +34,6 @@ public class AddDeck extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Need to alter the preview text in the next activity.
         setContentView(R.layout.activity_create);
 
         Button deckAcceptButton = (Button) findViewById(R.id.courseAcceptButton);
@@ -49,7 +48,7 @@ public class AddDeck extends AppCompatActivity {
                     @Override
                     public void onClick(View view){
                         createDeck(editText.getText().toString(), courseID);
-                        switchThings = new Intent(AddDeck.this, DeckList.class);
+                        switchThings = new Intent(AddDeck.this, Options.class);
                         startActivity(switchThings);
                     }
                 }

@@ -55,9 +55,6 @@ public class CourseList extends AppCompatActivity {
         ListView coursesListView = (ListView) findViewById(R.id.coursesListView);
         coursesListView.setAdapter(courseAdapter);
 
-        /*
-        nested method
-         */
 
         coursesListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -83,7 +80,9 @@ public class CourseList extends AppCompatActivity {
                         }
                         //if creating a card
                         else if(createType == 2){
-                            Intent coursePicked = new Intent(CourseList.this, CreateItems.class);
+                            Intent coursePicked = new Intent(CourseList.this,
+                                    DeckList.class);
+                                    //CreateItems.class);
                             startActivity(coursePicked);
                         }
                         //if creating a course
@@ -95,7 +94,7 @@ public class CourseList extends AppCompatActivity {
                         else{
                             Intent coursePicked = new Intent(CourseList.this, DeckList.class);
                             startActivity(coursePicked);
-                            createType = 0;
+                            //createType = 0;
                         }
                     }
                 }

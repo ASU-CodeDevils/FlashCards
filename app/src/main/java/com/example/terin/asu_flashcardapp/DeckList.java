@@ -28,14 +28,17 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
     String TAG = "StephanieTesting";
     Deck course = Deck.getDeckInstance();
     public int courseID = course.getCourseId();
-    public int deckID;
+    public int deckID = courseID;
+    public int createType = 0;
+
+    Intent switchThings = new Intent();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decks);
 
-        Button createButton = (Button) findViewById(R.id.createButton);
+        final Button createButton = (Button) findViewById(R.id.createButton);
         Button studyButton = (Button) findViewById(R.id.studyButton);
 
         System.out.println("DeckList HERE IS COURSE ID: " + courseID);
@@ -46,9 +49,23 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                 new View.OnClickListener(){
                     public void onClick(View view){
                         //THIS WILL NEED TO GO TO THE ADDCARD.JAVA CLASS
-                        Intent switchThings = new Intent(DeckList.this, CreateItems.class);
-                        CreateItems.setCreateType(1);
-                        startActivity(switchThings);
+                        //Intent switchThings = new Intent(DeckList.this, CreateItems.class);
+                        createType = CreateItems.getCreateType();
+                        switch(createType) {
+                            case 1:
+                                //Create a deck
+                                switchThings = new Intent(DeckList.this, AddDeck.class);
+                                startActivity(switchThings);
+                                break;
+                            case 2:
+                                //create a card in deck ____
+                                switchThings = new Intent(DeckList.this, AddCard.class);
+                                startActivity(switchThings);
+                                break;
+                            default:
+                                Intent deckPicked = new Intent(DeckList.this, StudyWindow.class);
+                                startActivity(deckPicked);
+                        }
                     }
                 }
         );
@@ -56,9 +73,12 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
         studyButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View view){
-                        //This is where SnackBar confirm ought to happen.
+                        //This is where SnackBar confirm ought to happen.  createType = course.get_deckId();
+
                         Intent newWindow = new Intent(DeckList.this, StudyWindow.class);
                         startActivity(newWindow);
+                        createType = CreateItems.getCreateType();
+                        System.out.println("onCreate Study button Decklist: " + createType);
                     }
                 }
         );
@@ -93,12 +113,29 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                         //String course = String.valueOf(parent.getItemAtPosition(position));
 
-                        Intent deckPicked = new Intent(DeckList.this, StudyWindow.class);
-                        startActivity(deckPicked);
+                        createType = CreateItems.getCreateType();
+                        deckID = position;
+                        System.out.println("deckListView Deck list createType: " + createType);
+                        switch (createType) {
+                            case 1:
+                                //Create a deck
+                                switchThings = new Intent(DeckList.this, AddDeck.class);
+                                startActivity(switchThings);
+                                break;
+                            case 2:
+                                //create a card in deck ____
+                                switchThings = new Intent(DeckList.this, CreateItems.class);
+                                startActivity(switchThings);
+                                break;
+                            default:
+                                Intent deckPicked = new Intent(DeckList.this, StudyWindow.class);
+                                startActivity(deckPicked);
+                        }
                     }
                 }
         );
     }
+
 
     /**
      * This method will adjust the fragment from a plain list to a checkbox

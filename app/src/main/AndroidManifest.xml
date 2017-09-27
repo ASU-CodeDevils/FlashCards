@@ -32,6 +32,7 @@
         </activity>
         <activity android:name=".AddCourse"></activity>
         <activity android:name=".AddDeck"></activity>
+        <activity android:name=".AddCard"></activity>
         <activity android:name=".Options"></activity>
         <activity android:name=".CourseList"></activity>
         <activity android:name=".UserStats"></activity>

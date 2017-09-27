@@ -28,6 +28,8 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
     public static int createType = 0;
     Deck course = Deck.getDeckInstance();
     public int courseID = course.getCourseId();
+    Deck deck = Deck.getDeckInstance();
+    public int deckID = deck.get_deckId();
     public int creationTypeFromOpts = 0;
 
     /**
@@ -41,7 +43,7 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         CreateItems item = new CreateItems();
         creationTypeFromOpts = Integer.valueOf(item.getCreateType());
-        //System.out.println("HERE WE ARE Create Items type: " + creationTypeFromOpts);
+        System.out.println("HERE WE ARE Create Items type: " + deck.getCourseId());
         System.out.println("CREATE ITEMS course id on create: " + courseID);
     }
 
@@ -72,7 +74,7 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
                 System.out.println("CREATE ITEMS CASE 1: " + createType);
                 break;
             case 2:
-                createCard(titleString);
+                createCard(titleString, deckID);
                 System.out.println("CREATE ITEMS CASE 2: " + createType);
                 break;
             case 3:
@@ -81,7 +83,7 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
                 break;
             default:
                 CreateItems.setCreateType(createType);
-                System.out.println("HERE WE ARE Create Items CreateType Default Case: " + createType);
+                System.out.println("Create Items CreateType Default Case: " + createType);
                 System.out.println("OR This is an invalid number of createType.");
                 break;
         }
@@ -123,12 +125,12 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         DBHandler db = new DBHandler(this);
         db.addCourse(courseName);
-        this.createType = createType;
+        //this.createType = createType;
 
         //This will probably close back to the Course List Screen.
 
         ArrayList<Course> courses = db.getCourses();
-        System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
+        //System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
         createType = 0;
 
         //for(int i = 0 ; i < courses.size() ; i++){
@@ -163,23 +165,19 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
      * This will allow cards to be added to the db.
      * @param cardName The title of the card the user created.
      */
-    private void createCard(String cardName){
+    private void createCard(String cardName, int deckId){
 
         DBHandler db = new DBHandler(this);
-        db.addCard(cardName, "placeHolder string", 0);
-        this.createType = createType;
+        db.addCard(cardName, deckId);
+
+        //This will probably close back to the Options Screen.
+
+        ArrayList<Card> cards = db.getCards(cardName, deckId);
         createType = 0;
-
-        //This will probably close back to the Course List Screen.
-
-        //The number 2 ought to be chosen from the coursList. (a number
-        //that corresponds to the name of the course.
-        ArrayList<Card> cards = db.getCards(createType);
 
         for(int i = 0 ; i < cards.size() ; i++){
             System.out.println("Card Name: " + cards.get(i).getCardQuestion());
         }
-
     }
 
     public static int getCreateType(){
