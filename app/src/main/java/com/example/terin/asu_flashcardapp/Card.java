@@ -19,6 +19,15 @@ public class Card {
     private Date createDate;
     private ArrayList<Wrong> wrongs;
 
+    public Card ( ) {
+
+    }
+
+    public Card(String cardQuestion, int deckId) {
+        this.cardQuestion = cardQuestion;
+        this.deckId = deckId;
+    }
+
     public Card(String cardQuestion, String correct, Wrong[] wrongs, int deckId, int authorId){
 
         this.cardQuestion = cardQuestion;
@@ -31,8 +40,6 @@ public class Card {
         }
 
     }
-
-
 
     //TODO: generates a random set of wrong answers
     public ArrayList<Wrong> generateWrongAnswers() {

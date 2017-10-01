@@ -43,7 +43,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CARD_QUESTION = "cardQuestion";
     private static final String CORRECT = "correct";
     private static final String CORRECT_COUNT = "correctCount";
-    private static final String TOTAL_COUNT = "cardQuestion";
+    private static final String TOTAL_COUNT = "totalCount";
     private static final String WRONG_ID = "_wrongId";
     private static final String WRONG = "wrong";
 
@@ -92,7 +92,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + WRONG + " TEXT, "
                 + "FOREIGN KEY(" + CARD_ID + ") REFERENCES " + TABLE_CARD_DETAIL + "(" + CARD_ID + "));";
 
-        db.execSQL(CREATE_CARD_DETAIL_TABLE);
+        db.execSQL(CREATE_WRONG_DETAIL_TABLE);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_COURSE_DETAIL, null, values);
 
-        Log.i(TAG, "addCourse: " + courseName);
+        Log.i(TAG, "DBHandler addCourse: " + courseName);
         db.close();
 
         //Testing adding Decks
@@ -140,7 +140,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         value = db.delete(TABLE_COURSE_DETAIL, COURSE_ID + "=" + courseID, null) > 0;
 
-        Log.i(TAG, "deleteCourse: " + courseID);
+        Log.i(TAG, "DBHandler deleteCourse: " + courseID);
         db.close();
 
         return value;
@@ -172,7 +172,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return courseList;
     }
 
-    // Antonio Added for StudyWindow courses collection view
+    // Antonio Added for CourseList courses collection view
     // May be unnecessary
     public Cursor getCoursesViewList() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -192,7 +192,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_DECK_DETAIL, null, values);
 
-        Log.i(TAG, "addDeck: " + deckName);
+        Log.i(TAG, "DB Handler addDeck: " + deckName);
+        Log.i(TAG, "DB courseID check addDeck: " + courseID);
         db.close();
 
     }
@@ -220,16 +221,19 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         cursor.moveToFirst();
-
+        System.out.println("DBHandler courseID in getDecks: " + courseID);
         //loop through all rows to return
         while(!cursor.isAfterLast()){
-            Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            Deck deck = new Deck(Integer.parseInt(cursor.getString(0)), courseID,
+                    cursor.getString(2), Integer.parseInt(cursor.getString(3)));
+            deck.set_deckId(courseID);
+            deckList.add(deck);
 
-            Log.i(TAG, "Get Deck: " + deck.getDeckName() + " DeckID: " + deck.get_deckId() + " CourseID: " + deck.getCourseId());
+            //Log.i(TAG, "HERE WE ARE CourseID: " + courseID);
             cursor.moveToNext();
         }
 
-        Log.i(TAG, "Return All Decks");
+        Log.i(TAG, "Return All Deck Names");
         db.close();
 
         return deckList;
@@ -243,13 +247,15 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //Add card to DB
-    public void addCard(String cardQuestion, String correct, int deckId) {
+    //public void addCard(String cardQuestion, String correct, int deckId) {
+    public void addCard(String cardQuestion, int deckId) {
 
+        int correct = 0;//temp value, not needed.
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(CARD_QUESTION, cardQuestion);
         values.put(CORRECT, correct);
-        values.put(CORRECT_COUNT, 0);
+        values.put(CORRECT_COUNT, 0); //The StudyWindow is counting wrong swipes. 9/26/17
         values.put(TOTAL_COUNT, 0);
         values.put(AUTHOR_ID, 1);
         values.put(CREATE_DATE, 05/20/2017);
@@ -257,7 +263,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_COURSE_DETAIL, null, values);
 
-        Log.d(TAG, "addCard: " + cardQuestion);
+        Log.d(TAG, "DB Handler addCard: " + cardQuestion);
         db.close();
 
 
@@ -282,39 +288,43 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //Get cards by deck id
-    public ArrayList<Card> getCards(int deckID){
+    public ArrayList<Card> getCards(String cardQuestion, int courseID){
         ArrayList<Card> cardList = new ArrayList<Card>();
-        String selectQuery = "SELECT * FROM " + TABLE_CARD_DETAIL + " WHERE " + DECK_ID + " = " + deckID;
+        String selectQuery = "SELECT * FROM " + TABLE_CARD_DETAIL + " WHERE " + DECK_ID + " = " + courseID;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         cursor.moveToFirst();
 
         //loop through all rows to return
+        System.out.println("DBHandler courseID in getCards:" + courseID);
         while(!cursor.isAfterLast()){
-            /*
-        String CREATE_CARD_DETAIL_TABLE = "CREATE TABLE " + TABLE_CARD_DETAIL + "("
-            // below is column indexes.
-             0   + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-             1   + DECK_ID + " INTEGER, "
-             2   + CARD_QUESTION + " TEXT, "
-             3   + CORRECT + " TEXT, "
-             4   + CORRECT_COUNT + " INTEGER, "
-             5   + TOTAL_COUNT + " INTEGER, "
-             6   + AUTHOR_ID + " INTEGER, "
+
+        /*String CREATE_CARD_DETAIL_TABLE = "CREATE TABLE " + TABLE_CARD_DETAIL + "(" +
+             0   + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+             1   + DECK_ID + " INTEGER, " +
+             2   + CARD_QUESTION + " TEXT, " +
+             3   + CORRECT + " TEXT, "+
+             4   + CORRECT_COUNT + " INTEGER, " +
+             5   + TOTAL_COUNT + " INTEGER, " +
+             6   + AUTHOR_ID + " INTEGER, " +
              7   + CREATE_DATE + " DATE, "
-                + "FOREIGN KEY(" + DECK_ID + ") REFERENCES " + TABLE_DECK_DETAIL + "(" + DECK_ID + "));";
+                + "FOREIGN KEY(" + DECK_ID + ") REFERENCES "
+                     + TABLE_DECK_DETAIL + "(" + DECK_ID + "));";
             */
-            Wrong wrongs[] = new Wrong[10]; // need to populate after making getWrongs method
+
+            //Wrong wrongs[] = new Wrong[10]; // need to populate after making getWrongs method
 
             //Card(String cardQuestion, String correct, Wrong[] wrongs, int deckId, int authorId){
-            Card card = new Card(cursor.getString(2), cursor.getString(3), wrongs, Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(6)));
-            card.setCorrectCount(Integer.parseInt(cursor.getString(4)));
-            card.setTotalCount(Integer.parseInt(cursor.getString(5)));
+            //Card card = new Card(cursor.getString(2), cursor.getString(3), wrongs, Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(6)));
+            Card card = new Card(cursor.getString(0), Integer.parseInt(cursor.getString(1)));
+            //card.setCorrectCount(Integer.parseInt(cursor.getString(4)));
+            //card.setTotalCount(Integer.parseInt(cursor.getString(5)));
             card.set_cardId(Integer.parseInt(cursor.getString(0)));
             //Date c = new Date(cursor.getLong(7));
             //card.setCreateDate(c);
-            Log.d(TAG, "Get Card: " + card.getCardQuestion() + " CardID: " + card.get_cardId() + " DeckID: " + card.getDeckId());
+            //Log.d(TAG, "Get Card: " + card.getCardQuestion() + " CardID: " + card.get_cardId() + " DeckID: " + card.getDeckId());
+            Log.d(TAG, "Get Card DB Handler: " + card.getCardQuestion() + " DeckID: " + card.getDeckId());
             cursor.moveToNext();
         }
 

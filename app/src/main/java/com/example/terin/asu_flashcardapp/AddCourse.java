@@ -13,16 +13,21 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
+/**
+ * Adds a course created by the user to the db.
+ */
+
 public class AddCourse extends AppCompatActivity {
 
     private static TextView textView;
     private static EditText editText;
     private static Intent startOptionsActivity;
+    //create a createItems object that can reference the createType number.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_course);
+        setContentView(R.layout.activity_create);
 
 //<<<<<<< Updated upstream
         Button courseAcceptButton = (Button) findViewById(R.id.courseAcceptButton);
@@ -48,7 +53,7 @@ public class AddCourse extends AppCompatActivity {
                 {
                     @Override
                     public void onClick(View view){
-                        createCourse(editText.getText().toString());
+                        createCourse(editText.getText().toString(), 3);
                         startOptionsActivity = new Intent(getApplicationContext(), Options.class);
                         startActivity(startOptionsActivity);
                     }
@@ -58,20 +63,11 @@ public class AddCourse extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-
-
-        return true;
-    }
-
-    private void createCourse(String courseName){
+    /**
+     * This method sends the string inputted by the user to the CourseList.
+     * @param courseName The string inputted by the user.
+     */
+    private void createCourse(String courseName, int createType){
 
         DBHandler db = new DBHandler(this);
         db.addCourse(courseName);
@@ -81,7 +77,7 @@ public class AddCourse extends AppCompatActivity {
         ArrayList<Course> courses = db.getCourses();
 
         for(int i = 0 ; i < courses.size() ; i++){
-            System.out.println("Course Name: " + courses.get(i).getCourseName());
+            System.out.println(" AddCourse Course Name: " + courses.get(i).getCourseName());
         }
 
     }

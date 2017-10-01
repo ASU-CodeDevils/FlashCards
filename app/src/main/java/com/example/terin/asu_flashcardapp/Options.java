@@ -8,9 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
-
-import android.content.Intent;
 /**
  * Created by Stephanie on 5/21/17.
  */
@@ -31,7 +28,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                AddCourse.class);
+                                CreateOptions.class);
                         startActivity(startCreateActivity);
 
                     }
@@ -43,7 +40,7 @@ public class Options extends AppCompatActivity{
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         Intent startCreateActivity = new Intent(getApplicationContext(),
-                                StudyWindow.class);
+                                CourseList.class);
                         startActivity(startCreateActivity);
 
                     }

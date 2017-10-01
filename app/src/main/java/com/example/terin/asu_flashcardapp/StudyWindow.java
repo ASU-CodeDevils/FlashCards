@@ -1,81 +1,69 @@
 package com.example.terin.asu_flashcardapp;
 
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
- * Created by Stephanie on 5/21/17.
- * Updated by Cyper on 7/10/2017.
- *
- * Displays the list of courses that the user has created. - AC
+ * This is the main study window for the application.
+ * Will show a flashcard image with random information displayed.
+ * The user will swipe right if they know the card, and left if
+ * they do not know the information on the card.
+ * (Will also return a count of wrong's to the wrong db table.
+ * Created by Stephanie on 8/13/17.
  */
 
-public class StudyWindow extends AppCompatActivity{
+public class StudyWindow extends AppCompatActivity {
 
-    String TAG = "AntonioTesting";
+    protected int wrongCount = 0;
+    String TAG = "Steph S.W. Gesture Test";
 
 
-    public void onCreate(Bundle savedInstanceState){
-
-        //Check the if running Android 5.0 or higher i.e Lollipop or other, used for Materials design.
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            //Material API's called.
-
-        }else{
-            //Implement this feature with out Material design.
-        }
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_study);
 
-        DBHandler myDb = new DBHandler(this);
+        /*
+        Need to collect the cards, in random order from the selected deck and
+        display the information on the lined white flashcard. The textView from
+        the StudyWindow Activity is: cardInformation, and the variable from
+        the db handler is: cardQuestion.
+         */
 
-        ArrayList<Course> courses = myDb.getCourses();
-        String[] coursesString = new String[courses.size()];
-//        Log.i(TAG, "Array Size: " + String.valueOf(coursesString.length));
-//        Log.i(TAG, "ArrayList Size: " + String.valueOf(courses.size()));
-        //ArrayList<String> coursesString = new ArrayList<>();
 
-        for(int i = 0; i < coursesString.length; i++) {
-            coursesString[i] = courses.get(i).getCourseName().toString();
-            Log.i(TAG, coursesString[i]);
-        }
-
-        ListAdapter courseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, coursesString);
-        ListView coursesListView = (ListView) findViewById(R.id.coursesListView);
-        coursesListView.setAdapter (courseAdapter);
-
-        coursesListView.setOnItemClickListener (
-                new AdapterView.OnItemClickListener () {
-
+        Button rightArrow = (Button) findViewById(R.id.rightButton);
+        rightArrow.setOnClickListener(
+                new Button.OnClickListener(){
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String course = String.valueOf(parent.getItemAtPosition(position));
-
-                        // This only shows the course that was clicked.
-                        //   This needs to open up a list of the decks that are tied to the course selected
-                        Toast.makeText(StudyWindow.this, course, Toast.LENGTH_LONG).show();
+                    public void onClick(View v) {
+                        wrongCount = wrongCount + 0;
+                        Log.i(TAG, String.valueOf(wrongCount));
                     }
                 }
         );
-    }
 
-    /**
-     * Need to add in the code for the swiping action, and
-     * create the actual index card images.
-     */
+        Button wrongArrow = (Button) findViewById(R.id.wrongButton);
+        wrongArrow.setOnClickListener(
+                new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        wrongCount = wrongCount + 1;
+                        Log.i(TAG, String.valueOf(wrongCount));
+                    }
+                }
+        );
+
+    }
 
     /**
      * Method to maintain a unified menu across all screens.
@@ -96,9 +84,6 @@ public class StudyWindow extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
-
         return true;
     }
 }
-
-

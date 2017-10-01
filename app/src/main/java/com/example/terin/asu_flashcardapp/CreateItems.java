@@ -25,6 +25,13 @@ import java.util.ArrayList;
 
 public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
 
+    public static int createType = 0;
+    Deck course = Deck.getDeckInstance();
+    public int courseID = course.getCourseId();
+    Deck deck = Deck.getDeckInstance();
+    public int deckID = deck.get_deckId();
+    public int creationTypeFromOpts = 0;
+
     /**
      * The activity that is set when this file is executed.
      * @param savedInstanceState The activity to be set.
@@ -34,7 +41,12 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
+        CreateItems item = new CreateItems();
+        creationTypeFromOpts = Integer.valueOf(item.getCreateType());
+        System.out.println("HERE WE ARE Create Items type: " + deck.getCourseId());
+        System.out.println("CREATE ITEMS course id on create: " + courseID);
     }
+
 
     /**
      * This is called by the bottom fragment, TitleCreateFragment,
@@ -49,16 +61,35 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
         PreviewFragment previewFrag = new PreviewFragment();
         TitleCreateFragment titleFrag = new TitleCreateFragment();
 
-        //Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
         //The following ought to be "Old T." = tempTitleInput & "New T" = title
-        ////bundle.putString("Old Text", "New Text");
-        //previewFrag.setArguments(bundle);
+        bundle.putString("Old Text", "New Text");
+        previewFrag.setArguments(bundle);
 
 
-        createCourse(titleString);
+        System.out.println("Create Items course ID: " + courseID);
+        switch (createType) {
+            case 1:
+                createDeck(titleString, courseID);
+                System.out.println("CREATE ITEMS CASE 1: " + createType);
+                break;
+            case 2:
+                createCard(titleString, deckID);
+                System.out.println("CREATE ITEMS CASE 2: " + createType);
+                break;
+            case 3:
+                createCourse(titleString);
+                System.out.println("CREATE ITEMS CASE 2: " + createType);
+                break;
+            default:
+                CreateItems.setCreateType(createType);
+                System.out.println("Create Items CreateType Default Case: " + createType);
+                System.out.println("OR This is an invalid number of createType.");
+                break;
+        }
+
         previewFrag.setPreviewText(titleString);
         fragTrans.add(R.id.fragment1, previewFrag).commit();
-        //fragTrans.add(R.id.fragment2, titleFrag).commit();
 
     }
 
@@ -94,15 +125,67 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         DBHandler db = new DBHandler(this);
         db.addCourse(courseName);
+        //this.createType = createType;
 
         //This will probably close back to the Course List Screen.
 
         ArrayList<Course> courses = db.getCourses();
+        //System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
+        createType = 0;
 
-        for(int i = 0 ; i < courses.size() ; i++){
-            System.out.println("Course Name: " + courses.get(i).getCourseName());
+        //for(int i = 0 ; i < courses.size() ; i++){
+            //System.out.println("CreateItems Course Name: " + courses.get(i).getCourseName());
+        //}
+
+    }
+
+    /**
+     * This will allow decks to be added to the db.
+     * @param deckName The title of the deck the user created.
+     */
+    private void createDeck(String deckName, int courseID){
+
+        DBHandler db = new DBHandler(this);
+        db.addDeck(deckName, courseID);
+
+        //This will probably close back to the Course List Screen.
+
+        ArrayList<Deck> decks = db.getDecks(courseID);
+        createType = 0;
+
+        System.out.println("HERE IS Create Items course ID createDeck method: " + courseID);
+        System.out.println("HERE IS Create Items create Type createDeck method: " + createType);
+        //for(int i = 0 ; i < decks.size() ; i++){
+        //    System.out.println("Create Items Deck Name: " + decks.get(i).getDeckName());
+        //}
+
+    }
+
+    /**
+     * This will allow cards to be added to the db.
+     * @param cardName The title of the card the user created.
+     */
+    private void createCard(String cardName, int deckId){
+
+        DBHandler db = new DBHandler(this);
+        db.addCard(cardName, deckId);
+
+        //This will probably close back to the Options Screen.
+
+        ArrayList<Card> cards = db.getCards(cardName, deckId);
+        createType = 0;
+
+        for(int i = 0 ; i < cards.size() ; i++){
+            System.out.println("Card Name: " + cards.get(i).getCardQuestion());
         }
+    }
 
+    public static int getCreateType(){
+        return createType;
+    }
+
+    public static void setCreateType(int buttonNum) {
+        createType = buttonNum;
     }
 
 }
