@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import java.util.Random;
+
 /**
  * Created by Stephanie on 5/31/17.
  * Java file that controls the fragment_create_preview.xml file.
@@ -15,6 +18,7 @@ import android.widget.*;
 public class PreviewFragment extends Fragment {
 
     private static TextView tempTitleInput;
+    Random randInfo = new Random();
 
     /**
      * The overridden method of onCreateView that works with fragments.

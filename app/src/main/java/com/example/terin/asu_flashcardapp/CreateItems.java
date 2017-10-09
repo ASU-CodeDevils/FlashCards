@@ -147,9 +147,6 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
 
         DBHandler db = new DBHandler(this);
         db.addDeck(deckName, courseID);
-
-        //This will probably close back to the Course List Screen.
-
         ArrayList<Deck> decks = db.getDecks(courseID);
         createType = 0;
 
@@ -165,14 +162,12 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
      * This will allow cards to be added to the db.
      * @param cardName The title of the card the user created.
      */
-    private void createCard(String cardName, int deckId){
+    private void createCard(String cardName, int courseID){
 
         DBHandler db = new DBHandler(this);
-        db.addCard(cardName, deckId);
+        db.addCard(cardName, courseID);
 
-        //This will probably close back to the Options Screen.
-
-        ArrayList<Card> cards = db.getCards(cardName, deckId);
+        ArrayList<Card> cards = db.getCards(courseID);
         createType = 0;
 
         for(int i = 0 ; i < cards.size() ; i++){
@@ -187,5 +182,14 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
     public static void setCreateType(int buttonNum) {
         createType = buttonNum;
     }
+
+
+    //TODO: Pause the thread to allow the change in text to be seen!
+    /*
+    Android
+    executes in a single thread, so pausing this thread should allow the user to
+    actually see their text on the flashcard image.
+     */
+
 
 }

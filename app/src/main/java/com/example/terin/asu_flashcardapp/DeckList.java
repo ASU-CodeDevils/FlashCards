@@ -59,7 +59,7 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
                                 break;
                             case 2:
                                 //create a card in deck ____
-                                switchThings = new Intent(DeckList.this, AddCard.class);
+                                switchThings = new Intent(DeckList.this, CreateItems.class);
                                 startActivity(switchThings);
                                 break;
                             default:
@@ -90,6 +90,8 @@ public class DeckList extends AppCompatActivity implements DeckListDefaultFrag.C
          * the selected deck's position in the course list array list.
          */
         ArrayList<Deck> decks = myDb.getDecks(courseID);
+
+        System.out.println("DeckList DECKS SIZE: " + decks.size());
 
         //courseTest.get(courseIDTest);
         String[] decksString = new String[decks.size()];

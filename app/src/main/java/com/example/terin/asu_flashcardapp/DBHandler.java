@@ -288,18 +288,20 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //Get cards by deck id
-    public ArrayList<Card> getCards(String cardQuestion, int courseID){
+    //public ArrayList<Card> getCards(String cardQuestion, int courseID){
+    public ArrayList<Card> getCards(int courseID) {
         ArrayList<Card> cardList = new ArrayList<Card>();
         String selectQuery = "SELECT * FROM " + TABLE_CARD_DETAIL + " WHERE " + DECK_ID + " = " + courseID;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        int cardId = 0;
 
         cursor.moveToFirst();
 
         //loop through all rows to return
-        System.out.println("DBHandler courseID in getCards:" + courseID);
+        System.out.println("DBHandler courseID in getCards: " + courseID);
         while(!cursor.isAfterLast()){
-
+            cardId += 1;
         /*String CREATE_CARD_DETAIL_TABLE = "CREATE TABLE " + TABLE_CARD_DETAIL + "(" +
              0   + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
              1   + DECK_ID + " INTEGER, " +
@@ -320,7 +322,7 @@ public class DBHandler extends SQLiteOpenHelper {
             Card card = new Card(cursor.getString(0), Integer.parseInt(cursor.getString(1)));
             //card.setCorrectCount(Integer.parseInt(cursor.getString(4)));
             //card.setTotalCount(Integer.parseInt(cursor.getString(5)));
-            card.set_cardId(Integer.parseInt(cursor.getString(0)));
+            card.set_cardId(Integer.parseInt(cursor.getString(cardId)));
             //Date c = new Date(cursor.getLong(7));
             //card.setCreateDate(c);
             //Log.d(TAG, "Get Card: " + card.getCardQuestion() + " CardID: " + card.get_cardId() + " DeckID: " + card.getDeckId());

@@ -12,6 +12,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  * This is the main study window for the application.
@@ -25,13 +30,39 @@ import android.widget.Button;
 public class StudyWindow extends AppCompatActivity {
 
     protected int wrongCount = 0;
-    String TAG = "Steph S.W. Gesture Test";
-
+    String TAG = "Stephanie Testing S.W.";
+    TextView cardInformation;
+    Random randCard = new Random();
+    DBHandler db = new DBHandler(this);
+    Card card = new Card();
+    Deck course = Deck.getDeckInstance();
+    public int courseID = course.getCourseId();
+    public int deckID = courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study);
+
+        ArrayList<Card> cardList = new ArrayList<Card>();
+        db.getCards(deckID);
+        cardInformation  = (TextView) findViewById(R.id.cardInformation);
+
+        int index = randCard.nextInt(cardList.size()+1);
+        //System.out.println("HERE'S THE CARD QUESTION @ 0: " + cardList.get(0).getCardQuestion());
+        //String cardInfo = cardList.get(index).toString();
+        String[] cardInfo = new String[index];
+        displayCardInfo(cardInfo.toString()); //need to print the string, not address
+        System.out.println("\nHERE'S card.GetCardQuestion: " + card.getCardQuestion());
+        // displayCardInfo(cardList.get(index).getCardQuestion());
+
+        for(int i = 0; i < cardList.size(); i++) {
+            //String temp = cardList.get(i).getCardQuestion();
+            String temp = cardList.get(i).getCardQuestion();
+            cardInfo[i] = temp;
+            //displayCardInfo(Arrays.toString(cardInfo));
+            System.out.println("HERE'S TEMP: " + temp);
+        }
 
         /*
         Need to collect the cards, in random order from the selected deck and
@@ -86,4 +117,16 @@ public class StudyWindow extends AppCompatActivity {
 
         return true;
     }
+
+    /**
+     * A method that pulls random card information from the user's selected
+     * deck and displays that information onto the lined white flash
+     * card image of the Study Window.
+     * @param cardInfo The information to be displayed.
+     */
+    public void displayCardInfo(String cardInfo){
+        cardInformation.setText(cardInfo);
+        System.out.print("HERE IS THE CARD INFO: " + cardInfo);
+    }
 }
+
