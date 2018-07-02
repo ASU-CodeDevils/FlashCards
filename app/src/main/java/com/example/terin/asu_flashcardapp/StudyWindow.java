@@ -48,13 +48,20 @@ public class StudyWindow extends AppCompatActivity {
         db.getCards(deckID);
         cardInformation  = (TextView) findViewById(R.id.cardInformation);
 
+        /**TODO:
+         * Need to get teh actual string from the deck, and not the address.
+         * currently printing the address. i.e. Change the Java string to
+         * something compatable with TextView.
+         * see: https://stackoverflow.com/questions/12201834/cast-string-to-textview
+         */
         int index = randCard.nextInt(cardList.size()+1);
         //System.out.println("HERE'S THE CARD QUESTION @ 0: " + cardList.get(0).getCardQuestion());
         //String cardInfo = cardList.get(index).toString();
         String[] cardInfo = new String[index];
-        displayCardInfo(cardInfo.toString()); //need to print the string, not address
-        System.out.println("\nHERE'S card.GetCardQuestion: " + card.getCardQuestion());
-        // displayCardInfo(cardList.get(index).getCardQuestion());
+        //card = String.valueOf(cardList.get(index));
+        System.out.println("\nHereis card info: " + cardList.get(index); //need to print the string, not address
+        //System.out.println("\nHERE'S card.GetCardQuestion: " + card.getCardQuestion());
+        displayCardInfo(String.valueOf(cardList.get(index)));
 
         for(int i = 0; i < cardList.size(); i++) {
             //String temp = cardList.get(i).getCardQuestion();
@@ -126,7 +133,8 @@ public class StudyWindow extends AppCompatActivity {
      */
     public void displayCardInfo(String cardInfo){
         cardInformation.setText(cardInfo);
-        System.out.print("HERE IS THE CARD INFO: " + cardInfo);
+        //System.out.print("HERE IS THE CARD INFO: " + cardInfo);
+        System.out.print("HERE IS THE CARD INFO: " + cardInformation);
     }
 }
 
