@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,9 @@ import java.util.ArrayList;
  * Created by Stephanie on 5/31/17.
  */
 
-public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener{
+public class CreateItems extends AppCompatActivity implements TitleCreateFragment.TitleCreateListener {
 
+    private final String TAG = "AntonioTesting";
     public static int createType = 0;
     Deck course = Deck.getDeckInstance();
     public int courseID = course.getCourseId();
@@ -78,9 +80,15 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
                 System.out.println("CREATE ITEMS CASE 2: " + createType);
                 break;
             case 3:
-                createCourse(titleString);
-                System.out.println("CREATE ITEMS CASE 2: " + createType);
-                break;
+                try {
+                    createCourse(titleString);
+                    System.out.println("CREATE ITEMS CASE 3: " + createType);
+                    break;
+                }
+                catch(CourseCreationException cce) {
+                    System.err.println(cce.getMessage());
+                    break;
+                }
             default:
                 CreateItems.setCreateType(createType);
                 System.out.println("Create Items CreateType Default Case: " + createType);
@@ -121,9 +129,20 @@ public class CreateItems extends AppCompatActivity implements TitleCreateFragmen
      * that one for creation of courses, etc.
      * @param courseName the title of the course the user created.
      */
-    private void createCourse(String courseName){
+    private void createCourse(String courseName) throws CourseCreationException {
 
         DBHandler db = new DBHandler(this);
+        //pull current course list names
+        ArrayList<Course> courseList = db.getCourses();
+        for(int i = 0; i < courseList.size(); i++) {
+            // compare inputted course name to existing course names.
+            if(courseList.get(i).getCourseName().equalsIgnoreCase(courseName)) {
+                String errorOutput = "The course " + courseName + " already exists.";
+                Log.i(TAG, "The course " + courseName + " already exists.");
+                throw new CourseCreationException(getApplicationContext(), errorOutput); // if match, throw error
+            }
+        }
+        // if no match, create the course
         db.addCourse(courseName);
         //this.createType = createType;
 

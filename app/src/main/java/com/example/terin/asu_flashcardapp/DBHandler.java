@@ -159,6 +159,8 @@ public class DBHandler extends SQLiteOpenHelper {
         while(!cursor.isAfterLast()){
 
             Course course = new Course(cursor.getString(1),Integer.parseInt(cursor.getString(2)));
+            Log.i(TAG, "Column 1: " + cursor.getString(1) + ", Column 2: " +
+                    cursor.getString(2) + ", Column 2 name: " + cursor.getColumnName(2));
             course.set_courseId(Integer.parseInt(cursor.getString(0)));
             courseList.add(course);
 
